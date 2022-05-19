@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import defaultSEOConfig from '../../next-seo.config';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo {...defaultSEOConfig} />
@@ -12,4 +12,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 }
 
-export default MyApp
+export default App
