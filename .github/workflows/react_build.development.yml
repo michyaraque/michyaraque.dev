@@ -1,0 +1,28 @@
+name: Deployment Development path
+on:
+  push:
+    branches:
+      - development
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm ci
+      - run: npm run build:dev --if-present
+      - run: mv .htaccess ./htaccess
+        env:
+          CI: false
+      - name: Copiar contenido de forma recursiva hacia la VPS
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: out
+          remote: ${{ secrets.PATH }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+      - run: echo "El estado del job es ${{ job.status }}."
