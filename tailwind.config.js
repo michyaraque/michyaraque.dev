@@ -1,3 +1,5 @@
+const { spacing, fontFamily } = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
