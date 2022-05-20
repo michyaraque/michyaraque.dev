@@ -1,38 +1,13 @@
-import { useRouter } from 'next/router';
 import { BsArrowRight } from 'react-icons/bs';
 
 import { Metadata, Wrapper } from 'components/common/Layout';
+import { PostCard } from 'components/ui/Posts';
+import { SnippetCard } from 'components/ui/Snippets';
 
-const Card = ({ title }: { title: string }) => {
-  return (
-    <div className="block p-6 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-      {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5> */}
-      <p className="font-normal text-gray-700 dark:text-gray-400">
-        {title}
-      </p>
-    </div>
-  )
-}
+import { getAllFilesMetadata } from '../../lib/mdx';
+import Link from 'next/link';
 
-const SnippetCard = ({ title }: { title: string }) => {
-  return (
-    <div className="block py-4 px-2 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer">
-
-      <section className="flex flex-row items-center gap-2 h-full">
-        <div className="block min-w-[30px] min-h-[30px] bg-gray-700 rounded-md"></div>
-        <p className="text-xs font-regular text-gray-700 dark:text-gray-400">
-          {title}
-        </p>
-        <div className="min-w-[30px] m-auto">
-          <BsArrowRight />
-        </div>
-      </section>
-    </div>
-  )
-}
-
-const Index = () => {
-  const router = useRouter();
+const Index = ({ posts, snippets }: any) => {
 
   return (
     <Wrapper
@@ -43,41 +18,58 @@ const Index = () => {
         />
       }
     >
-
+      <div className="flex flex-col justify-center items-center my-8">
+        <img src="me.jpg" alt="Test" className="w-1/6 blob" />
+        <h1 className="text-[40px] font-bold mt-2">
+          Michael Araque
+        </h1>
+        <h2 className="text-[18px] font-regular mt-2">
+          CTO & Blockchain developer at <b>Foxtrot Command</b>
+        </h2>
+      </div>
 
       <>
-        <h1 className="text-2xl font-bold">
+        <h3>
           Publicaciones destacadas
-        </h1>
+        </h3>
+        <p className="mt-4 mb-2 text-gray-600 text-base font-medium dark:text-gray-400">
+          Normalmente aquí verás las publicaciones destacadas o las que me apetezca destacar 😎.
+        </p>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <Card title="Noteworthy technology acquisitions 2021" />
-          <Card title="Noteworthy technology acquisitions 2021" />
-          <Card title="Noteworthy technology acquisitions 2021" />
+          {posts.slice(0, 3).map(({ title, slug }: any, index: number) => (
+            <PostCard key={index} title={title} slug={slug} />
+          ))}
         </div>
-        <a className="flex mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6" href="/blog">
-          Read all posts
-          <div className="ml-3 mt-1">
-            <BsArrowRight />
-          </div>
-        </a>
+        <Link href="/blog">
+          <a className="flex text-[18px] mt-4 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
+            Ver todos los posts
+            <div className="ml-3 mt-1">
+              <BsArrowRight />
+            </div>
+          </a>
+        </Link>
       </>
 
       <section className="mt-10">
-        <h1 className="text-2xl font-bold">
+        <h3>
           Snippets destacadas
-        </h1>
+        </h3>
+        <p className="mt-4 mb-2 text-gray-600 text-base font-medium dark:text-gray-400">
+          Los snippets suelen ser trozos de código funcional que ayudan a mejorar mi experiencia en el desarrollo y por eso me apetecería destacar algunos y esperar que te sirvan tanto como a mi
+        </p>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <SnippetCard title="Solidity advance Time to interact w/ future" />
-          <SnippetCard title="Noteworthy technology" />
-          <SnippetCard title="Noteworthy technology" />
+          {snippets.slice(0, 3).map(({ title, slug, icon }: any, index: number) => (
+            <SnippetCard key={index} title={title} slug={slug} icon={icon} />
+          ))}
         </div>
-        <a className="flex mt-8 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6" href="/blog">
-          Read all posts
+        <Link href="/snippets">
+        <a className="flex text-[18px] mt-4 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
+          Ver todos los snippets
           <div className="ml-3 mt-1">
-
             <BsArrowRight />
           </div>
         </a>
+        </Link>
       </section>
 
     </Wrapper>
@@ -85,3 +77,15 @@ const Index = () => {
 };
 
 export default Index;
+
+export async function getStaticProps() {
+
+  const posts = await getAllFilesMetadata("blog");
+  const snippets = await getAllFilesMetadata("snippets").sort((a: any, b: any): any => {
+    Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
+  });
+
+  return {
+    props: { posts, snippets }
+  }
+}
