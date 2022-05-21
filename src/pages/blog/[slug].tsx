@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 import { getFileBySlug, getFiles } from '../../../lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
 
 export default function Post({ source, frontmatter }: any) {
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await fetch(`https://michyaraque.dev/easy-backend/views/${frontmatter.slug}`, {
+          method: 'POST',
+        });
+      } catch(error) {
+        console.log(error)
+      }
+    })();
+
+  }, [])
+
   return (
     <Wrapper
       meta={<Metadata title={frontmatter.slug} description="test" />}

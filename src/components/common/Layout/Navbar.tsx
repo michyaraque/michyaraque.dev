@@ -1,33 +1,15 @@
 import Link from 'next/link'
 import React from 'react'
+import NavItem from '../NavItem'
 
 const Navbar = () => {
   return (
-    <>
-      <ul className="flex flex-wrap text-xl">
-        <li className="mr-6">
-          <Link href="/">
-            <a className="border-none text-gray-700 hover:text-gray-900">
-              Home
-            </a>
-          </Link>
-        </li>
-        <li className="mr-6">
-          <Link href="/about/">
-            <a className="border-none text-gray-700 hover:text-gray-900">
-              About
-            </a>
-          </Link>
-        </li>
-        <li className="mr-6">
-          <Link href="/blog/">
-            <a className="border-none text-gray-700 hover:text-gray-900">
-              Blog
-            </a>
-          </Link>
-        </li>
-      </ul>
-    </>
+    <nav className="flex flex-wrap text-xl gap-4">
+      <NavItem href="/" text="Inicio" />
+      <NavItem href="/blog" text="Blog" />
+      <NavItem href="/snippets" text="Snippets" />
+      <NavItem href="/my-projects" text="Mis Proyectos" />
+    </nav>
   )
 }
 

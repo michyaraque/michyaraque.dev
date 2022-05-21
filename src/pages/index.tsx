@@ -6,6 +6,7 @@ import { SnippetCard } from 'components/ui/Snippets';
 
 import { getAllFilesMetadata } from '../../lib/mdx';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const Index = ({ posts, snippets }: any) => {
 
