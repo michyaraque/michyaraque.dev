@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.22.12]
+        node-version: [14.18.1]
 
     steps:
       - uses: actions/checkout@v2
@@ -54,8 +54,16 @@ jobs:
       - name: Copy HTACCESS to VPS
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: .apache/.htaccess
+          local: .backend/root/.htaccess
           remote: ${{ secrets.VPS_PATH }}/.htaccess
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+      - name: Copy backend to VPS
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: .backend/easy-backend
+          remote: ${{ secrets.VPS_PATH }}/easy-backend
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}

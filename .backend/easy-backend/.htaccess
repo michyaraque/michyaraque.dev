@@ -1,0 +1,15 @@
+IndexIgnore *
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+RewriteRule (.*)/(.*) api.php?slug=$1
+
+RewriteEngine On 
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://michyaraque.dev/$1 [R,L]
+
+RewriteEngine On
+ErrorDocument 404 /error
+RewriteRule ^error$ / [R]
