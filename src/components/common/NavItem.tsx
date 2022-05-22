@@ -1,10 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react'
-
-const wrap = (data: string, extraContent: string) => {
-  return data.replace(/\n/g, ' ') + ' ' + extraContent;
-}
+import { wrap } from 'utils';
 
 const NavItem = ({ href, text }: {href: string, text: string}) => {
   const router = useRouter();

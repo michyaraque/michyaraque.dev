@@ -1,4 +1,5 @@
 import { BsArrowRight } from 'react-icons/bs';
+import { SiLua } from 'react-icons/si';
 
 import { Metadata, Wrapper } from 'components/common/Layout';
 import { PostCard } from 'components/ui/Posts';
@@ -6,7 +7,7 @@ import { SnippetCard } from 'components/ui/Snippets';
 
 import { getAllFilesMetadata } from '../../lib/mdx';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import MeCard from 'components/MeCard';
 
 const Index = ({ posts, snippets }: any) => {
 
@@ -19,15 +20,35 @@ const Index = ({ posts, snippets }: any) => {
         />
       }
     >
-      <div className="flex flex-col justify-center items-center my-8">
-        <img src="me.jpg" alt="Test" className="w-1/6 blob" />
-        <h1 className="text-[40px] font-bold mt-2">
-          Michael Araque
-        </h1>
-        <h2 className="text-[18px] font-regular mt-2">
-          CTO & Blockchain developer at <b>Foxtrot Command</b>
-        </h2>
+      <div className="flex flex-row mb-8 pt-16">
+        <div className="w-full">
+          <div className="w-full md:w-5/6 h-full flex flex-col gap-2 text-lg">
+            <div className="w-full text-5xl md:text-7xl whitespace-nowrap font-bold
+            bg-gradient-to-r bg-clip-text  text-transparent
+            from-indigo-500 via-purple-500 to-indigo-500
+            animate-text
+            transition-all duration-200 ease-in-out
+            ">
+              ¡Buenas friend!
+            </div>
+
+            <p className="mb-4 mt-10">
+              Soy Michael Araque un desarrollador blockchain y backend con una leve pasión por el frontend (pequeña eh 😅)
+            </p>
+
+            <div className="flex flex-col gap-2 leading-[24px] text-gray-600">
+              <p>Empecé a programar en el año 2009 con <SiLua className="inline-block text-languages-lua" /> (Lua) ya que en aquel entonces con 12 años me gustaban mucho los videojuegos y toquetear las entrañas de estos</p>
+              <p>Todo mi aprendizaje ha sido de manera totalmente autodidacta y me he dedicado a estudiar y aprender nuevas tecnologías y herramientas con el paso del tiempo</p>
+            </div>
+
+          </div>
+        </div>
+        <div className="h-full hidden md:inline">
+          <MeCard />
+        </div>
       </div>
+
+      <hr className="my-10" />
 
       <>
         <h3>
@@ -64,12 +85,12 @@ const Index = ({ posts, snippets }: any) => {
           ))}
         </div>
         <Link href="/snippets">
-        <a className="flex text-[18px] mt-4 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
-          Ver todos los snippets
-          <div className="ml-3 mt-1">
-            <BsArrowRight />
-          </div>
-        </a>
+          <a className="flex text-[18px] mt-4 text-gray-600 dark:text-gray-400 leading-7 rounded-lg hover:text-gray-800 dark:hover:text-gray-200 transition-all h-6">
+            Ver todos los snippets
+            <div className="ml-3 mt-1">
+              <BsArrowRight />
+            </div>
+          </a>
         </Link>
       </section>
 

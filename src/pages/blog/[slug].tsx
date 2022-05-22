@@ -1,31 +1,57 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
+
 import { getFileBySlug, getFiles } from '../../../lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
+import { slugToHex, styledDate } from 'utils';
 
 export default function Post({ source, frontmatter }: any) {
+  const [views, setViews] = useState<string|number>('----');
 
   useEffect(() => {
     (async () => {
       try {
-        await fetch(`https://michyaraque.dev/easy-backend/views/${frontmatter.slug}`, {
+        const response = await fetch(`https://michyaraque.dev/easy-backend/views/${frontmatter.slug}`, {
           method: 'POST',
         });
-      } catch(error) {
+        const data = await response.json();
+        setViews(data.total);
+      } catch (error) {
         console.log(error)
       }
     })();
 
-  }, [])
+  }, []);
 
   return (
     <Wrapper
       meta={<Metadata title={frontmatter.slug} description="test" />}
     >
-      <h1 className="text-5xl text-black font-bold">{frontmatter.title}</h1>
-      <small>{frontmatter.publishedAt}</small>
-      <MDXRemote {...source} components={MDXComponents}/>
+      <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 " style={{
+        backgroundColor: slugToHex(frontmatter.slug),
+      }}>
+        <h1 className="text-2xl md:text-5xl text-white font-bold">{frontmatter.title}</h1>
+
+        <div className="text-white flex justify-between mt-4">
+
+          <div className="flex items-center">
+            <img src="/me.jpg" alt="Michael Araque's face" className="w-[36px] rounded-full border-2 p-0.5" />
+            <div className="text-base ml-2 flex flex-col md:flex-row gap-1 md:gap-2">
+              <p>Michael Araque</p>
+              <span className="hidden md:inline"> | </span>
+              <p>{styledDate(frontmatter.publishedAt)}</p>
+            </div>
+          </div>
+          <div className="text-base flex items-end md:items-center">
+
+            <p className="ml-1">
+              {views && views} visitas
+            </p>
+          </div>
+        </div>
+      </div>
+      <MDXRemote {...source} components={MDXComponents} />
     </Wrapper>
   )
 }
@@ -45,6 +71,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   const { source, frontmatter }: any = await getFileBySlug(params.slug, "blog")
+
   return {
     props: {
       source,

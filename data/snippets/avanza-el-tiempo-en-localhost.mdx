@@ -1,0 +1,13 @@
+---
+title: 'Avanza el tiempo y bloques en localhost'
+publishedAt: '2022-05-18'
+summary: 'Avanza el tiempo'
+icon: 'solidity'
+---
+
+```js
+const AdvanceTime = async (time: number) => {
+  await ethers.provider.send('evm_increaseTime', [time]);
+  await ethers.provider.send('evm_mine', []);
+}
+```

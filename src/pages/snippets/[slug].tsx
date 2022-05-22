@@ -10,7 +10,7 @@ export default function Post({ source, frontmatter }: any) {
       meta={<Metadata title={frontmatter.slug} description="test" />}
     >
       <h1 className="text-4xl font-bold">{frontmatter.title}</h1>
-      <small>{frontmatter.publishedAt}</small>
+
       <MDXRemote {...source} components={MDXComponents}/>
     </Wrapper>
   )

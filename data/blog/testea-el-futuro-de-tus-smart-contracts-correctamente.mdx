@@ -1,0 +1,115 @@
+---
+title: '¿Por qué deberías testear el futuro de tus smart contracts?'
+publishedAt: '2022-05-20'
+summary: 'Test summar'
+---
+
+Me he dado cuenta que muchos desarrolladores, en sus etapas más tempranas, suelen dejar de lado los tests. No probar el código de manera correcta puede llegar a ser catastrófico, y más cuando hablamos de Smart Contracts donde la normalidad es que intervenga el *'dinerito'*... Dudo que a alguien le guste perder *'dinerito'* ¿o sí? La cosa está que en caso de ocurrir un error no se perderían *2 eurillos* sueltos, se pueden llegar a perder cantidades gigantescas de dinero por no haber hecho buen uso de las herramientas de testing.
+
+Es por esto que te voy a compartir una manera rápida y sencilla de poder testear como va a interactuar tu smart contract en el futuro. Las pruebas del futuro son necesarias en contratos de tipo *'Vesting'* o de tipo *'Crowd'*.
+
+Herramientas que usaremos para hacer funcionar este código son las siguientes:
+
+<Technology name="solidity" version="0.8.13"/>
+<Technology name="hardhat"/>
+<Technology name="chai"/>
+<Technology name="waffle"/>
+
+Pongamos el siguiente ejemplo donde crearemos un contrato llamado **TestFuture** que nos servirá de guía para saber que realmente sí estamos adelantando el tiempo, creamos una función llamada **execute** con solo un argumento del tipo `address`
+
+```solidity:/contracts/TestFuture.sol
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.13;
+
+contract TestFuture {
+
+    uint256 internal constant _MIN_DELAY = 120;
+    mapping(address => uint256) private trackTime;
+
+    function execute(address addr) external returns (bool) {
+        require(trackTime[addr] == 0 || trackTime[addr] <= block.timestamp, "GUARD: Wait for the time");
+        trackTime[addr] = block.timestamp + _MIN_DELAY;
+        return true;
+    }
+
+}
+```
+
+Lo que le estamos haciendo con esta función es guardar el timestamp del momento en el que se realizó la llamada a la función para poder compararlo con el momento en el que se realizará la prueba, si te fijas hemos creado una constante llamada `_MIN_DELAY` que es la cantidad de tiempo que debemos esperar para que poder volver a llamar la función.
+
+## Ahora los tests
+
+Antes que nada vamos a conocer la estrella de este post que será la función que se encargará de avanzar el tiempo en tu hardhat en local o en tu truffle con ganache.
+Esta función lo que hace es avanzar el tiempo que le pases por parámetro (en segundos) y a su vez mina los bloques necesarios.
+
+```js
+const AdvanceTime = async (time: number) => {
+  await ethers.provider.send('evm_increaseTime', [time]);
+  await ethers.provider.send('evm_mine', []);
+}
+```
+
+Ahora vamos a crear un escenario en el cual poder probar el futuro de nuestro contrato. Para ello vamos a crear el archivo de test llamado **TestFuture.test.js** el cual ejecutaremos desde la consola con los comandos de *hardhat*, recuerda estar en la raíz del proyecto cuando ejecutes el comando (ya he tenido dolores de cabeza por estar en otra carpeta por error 😅).
+
+
+```js:/test/TestFuture.test.ts
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { Contract } from "ethers";
+import { expect } from "chai";
+import { ethers } from "hardhat";
+
+describe("TestFuture Contract", function () {
+
+  let testFuture: Contract,
+    masterAccount: SignerWithAddress,
+    addrs: SignerWithAddress[];
+
+  before(async () => {
+
+    [masterAccount, ...addrs] = await ethers.getSigners();
+
+    const TestFuture = await ethers.getContractFactory("TestFuture");
+    testFuture = await TestFuture.deploy();
+
+  });
+
+  describe("Test the future [#spanglish]", async () => {
+
+    it("Debería hacer la transacción sin ningún problema", async () => {
+      await testFuture.execute(masterAccount.address);
+    })
+
+    it("Debería revertir el proceso", async () => {
+      await expect(testFuture.execute(masterAccount.address))
+        .to.be.revertedWith('GUARD: Wait for the time');
+    })
+
+    it("Debería adelantar el tiempo y realizar la transacción sin problema", async () => {
+      // Adelantemos el tiempo
+      await AdvanceTime(121);
+      // Se ejecutará ya que el timestamp actual es superior al del trackTime
+      await testFuture.execute(masterAccount.address);
+    });
+
+  });
+
+});
+```
+Ahora en la **Terminal** deberás ver que se ejecuta el test y que no hay errores.
+
+```bash
+$ npx hardhat test test/TestFuture.test.js
+...
+TestFuture Contract
+  Test the future [#spanglish]
+    ✔ Debería hacer la transacción sin ningún problema (51ms)
+    ✔ Debería revertir el proceso (39ms)
+    ✔ Debería adelantar el tiempo y realizar la transacción sin problema
+
+
+3 passing (263ms)
+```
+
+Espero que esto te haya ayudado a entender como se puede llegar a testar como van a interactuar tus funciones o estados en el futuro.
+
+Cya, espero que te haya gustado este post 🤗
