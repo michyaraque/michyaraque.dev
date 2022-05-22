@@ -6,6 +6,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypePrism from 'rehype-prism-plus';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import remarkCodeTitles from './remark-code-title'
 
 const options = {
   mdxOptions: {
@@ -14,6 +15,7 @@ const options = {
       rehypePrism
     ],
     remarkPlugins: [
+      remarkCodeTitles
     ]
   },
 };
