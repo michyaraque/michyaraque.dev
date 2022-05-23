@@ -7,6 +7,7 @@ import rehypePrism from 'rehype-prism-plus';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkCodeTitles from './remark-code-title'
+import readingTime from 'reading-time';
 
 const options = {
   mdxOptions: {
@@ -32,6 +33,7 @@ export const getFileBySlug = async ( slug: string, securePath: string ) => {
   return {
     source,
     frontmatter: {
+      readingTime: readingTime(mdxSource),
       slug,
       ...data,
     }

@@ -1,1 +1,1 @@
-export * from './UiUtils';
+export * from './utils';

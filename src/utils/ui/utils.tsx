@@ -14,3 +14,9 @@ export const styledDate = (date: string) => {
 export const wrap = (data: string, ...extraContent: any) => {
   return data.replace(/\n/g, ' ') + ' ' + extraContent;
 }
+
+export const readingTimeToSpanish = (time: string) => {
+  let readingTimeValue = time.split(' min read')[0];
+  const plural = Number(readingTimeValue) > 1 ? 's' : '';
+  return readingTimeValue + ` min${plural} de lectura`;
+}
