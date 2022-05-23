@@ -5,13 +5,16 @@ import { NextSeo } from 'next-seo';
 import { AppConfig } from 'constant/AppConfig';
 
 type IMetadataProps = {
-  title: string;
+  title?: string;
   description: string;
   canonical?: string;
+  titleTemplate?: string;
 };
 
 const Metadata = (props: IMetadataProps) => {
   const router = useRouter();
+
+  const { title, description, canonical, ...metadataRest } = props;
 
   return (
     <>
@@ -48,6 +51,7 @@ const Metadata = (props: IMetadataProps) => {
         />
       </Head>
       <NextSeo
+        {...metadataRest}
         title={props.title}
         description={props.description}
         canonical={props.canonical}
