@@ -1,21 +1,22 @@
+import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import { SiLua } from 'react-icons/si';
 
 import { Metadata, Wrapper } from 'components/common/Layout';
 import { PostCard } from 'components/ui/Posts';
 import { SnippetCard } from 'components/ui/Snippets';
-
-import { getAllFilesMetadata } from '../../lib/mdx';
-import Link from 'next/link';
 import MeCard from 'components/MeCard';
 
-const Index = ({ posts, snippets }: any) => {
+import { getAllFilesMetadata } from '../../lib/mdx';
+
+const Index = ({ posts, snippets }: Record<string, any >) => {
 
   return (
     <Wrapper
       meta={
         <Metadata
-          title="Michael Araque"
+          title=" "
+          titleTemplate='Michael Araque - Arquitecto de ideas y futuro difusor de conocimiento'
           description="Crear, innovar y compartir ideas"
         />
       }
@@ -36,9 +37,10 @@ const Index = ({ posts, snippets }: any) => {
               Soy Michael Araque un desarrollador blockchain y backend con una leve pasión por el frontend (pequeña eh 😅)
             </p>
 
-            <div className="flex flex-col gap-2 leading-[24px] text-gray-600">
+            <div className="flex flex-col gap-3 leading-[24px] text-gray-600">
               <p>Empecé a programar en el año 2009 con <SiLua className="inline-block text-languages-lua" /> (Lua) ya que en aquel entonces con 12 años me gustaban mucho los videojuegos y toquetear las entrañas de estos</p>
               <p>Todo mi aprendizaje ha sido de manera totalmente autodidacta y me he dedicado a estudiar y aprender nuevas tecnologías y herramientas con el paso del tiempo</p>
+              <p>Por eso he decidido craftear este blog para aprender y mejorar mis habilidades frontend, espero el contenido y el blog te gusten 🦾</p>
             </div>
 
           </div>

@@ -10,7 +10,7 @@ const Blog = ({ posts }: any) => {
     <Wrapper
       meta={
         <Metadata
-          title="Michael Araque"
+          title="Blog"
           description="Crear, innovar y compartir ideas"
         />
       }

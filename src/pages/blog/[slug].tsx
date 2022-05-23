@@ -4,7 +4,7 @@ import { MDXRemote } from 'next-mdx-remote'
 import { getFileBySlug, getFiles } from '../../../lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
-import { slugToHex, styledDate } from 'utils';
+import { readingTimeToSpanish, slugToHex, styledDate } from 'utils';
 
 export default function Post({ source, frontmatter }: any) {
   const [views, setViews] = useState<string|number>('----');
@@ -26,7 +26,7 @@ export default function Post({ source, frontmatter }: any) {
 
   return (
     <Wrapper
-      meta={<Metadata title={frontmatter.slug} description="test" />}
+      meta={<Metadata title={frontmatter.title} description="test" />}
     >
       <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 " style={{
         backgroundColor: slugToHex(frontmatter.slug),
@@ -37,16 +37,19 @@ export default function Post({ source, frontmatter }: any) {
 
           <div className="flex items-center">
             <img src="/me.jpg" alt="Michael Araque's face" className="w-[36px] rounded-full border-2 p-0.5" />
-            <div className="text-base ml-2 flex flex-col md:flex-row gap-1 md:gap-2">
+            <div className="text-base ml-2 flex flex-col md:flex-row md:gap-2">
               <p>Michael Araque</p>
               <span className="hidden md:inline"> | </span>
               <p>{styledDate(frontmatter.publishedAt)}</p>
             </div>
           </div>
-          <div className="text-base flex items-end md:items-center">
+          <div className="text-base flex flex-col items-end md:items-end">
 
             <p className="ml-1">
               {views && views} visitas
+            </p>
+            <p>
+              {readingTimeToSpanish(frontmatter.readingTime.text)}
             </p>
           </div>
         </div>
@@ -77,6 +80,7 @@ export async function getStaticProps({ params }: any) {
       source,
       frontmatter: {
         slug: params.slug,
+        readingTime: frontmatter.readingTime,
         ...frontmatter
       }
     }

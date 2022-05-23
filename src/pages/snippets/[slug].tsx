@@ -7,7 +7,7 @@ import MDXComponents from 'components/MDXComponents';
 export default function Post({ source, frontmatter }: any) {
   return (
     <Wrapper
-      meta={<Metadata title={frontmatter.slug} description="test" />}
+      meta={<Metadata title={frontmatter.title} description="Snippets" />}
     >
       <h1 className="text-4xl font-bold">{frontmatter.title}</h1>
 

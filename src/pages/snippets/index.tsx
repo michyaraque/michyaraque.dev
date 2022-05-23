@@ -1,7 +1,7 @@
 import { Metadata, Wrapper } from 'components/common/Layout';
 import { SnippetCard } from 'components/ui/Snippets';
+import {getAllFilesMetadata} from '@lib/mdx';
 
-import { getAllFilesMetadata } from '../../../lib/mdx';
 
 const Snippets = ({ snippets }: any) => {
 
@@ -9,7 +9,7 @@ const Snippets = ({ snippets }: any) => {
     <Wrapper
       meta={
         <Metadata
-          title="Michael Araque"
+          title="Snippets"
           description="Crear, innovar y compartir ideas"
         />
       }
