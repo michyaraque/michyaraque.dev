@@ -2,16 +2,8 @@ import { useState, useRef } from 'react'
 
 const Pre = (props: any) => {
   const textInput = useRef<any>(null)
-  const [hovered, setHovered] = useState(false)
   const [copied, setCopied] = useState(false)
 
-  const onEnter = () => {
-    setHovered(true)
-  }
-  const onExit = () => {
-    setHovered(false)
-    setCopied(false)
-  }
   const onCopy = () => {
     setCopied(true)
     navigator.clipboard.writeText(textInput.current.textContent)
@@ -21,8 +13,8 @@ const Pre = (props: any) => {
   }
 
   return (
-    <div ref={textInput} onMouseEnter={onEnter} onMouseLeave={onExit} className="relative">
-      {hovered && (
+    <div ref={textInput} className="relative">
+      {
         <button
           aria-label="Copy code"
           type="button"
@@ -61,7 +53,7 @@ const Pre = (props: any) => {
             )}
           </svg>
         </button>
-      )}
+      }
 
       <pre>{props.children}</pre>
     </div>

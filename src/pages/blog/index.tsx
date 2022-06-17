@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import { Metadata, Wrapper } from 'components/common/Layout';
-import { PostCard } from 'components/ui/Posts';
+import { FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 
 import { getAllFilesMetadata } from '../../../lib/mdx';
 
 const Blog = ({ posts }: any) => {
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const filteredBlogPosts = posts.filter((post: any) =>
+    post.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <Wrapper
@@ -20,13 +26,26 @@ const Blog = ({ posts }: any) => {
         Blog
       </h1>
 
+      <label className="relative block">
+        <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+          <FaSearch />
+        </span>
+        <input
+          className="placeholder:italic placeholder:text-slate-400 block bg-slate-100 hover:bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+          type="text"
+          placeholder="Buscar"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+      </label>
+
       <div className="mt-4 grid">
-        {posts.map(({ title, slug, summary }: any, index: number) => (
-          <div key={index}>
+        <h3 className="mb-4">Todos los posts</h3>
+        {filteredBlogPosts.map(({ title, slug, summary }: any, index: number) => (
+          <div key={index} className="hover:bg-slate-100 hover:rounded-md p-4">
             <Link href={`/blog/${slug}`}>
               <a>
-                <h2 className="text-2xl ">{title}</h2>
-                <p>{summary}</p>
+                <h2 className="text-2xl font-bold">{title}</h2>
+                <p className="text-slate-500 text-lg">{summary}</p>
               </a>
             </Link>
           </div>
