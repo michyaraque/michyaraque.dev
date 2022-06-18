@@ -44,7 +44,7 @@ const Navbar = () => {
         <NavItem href="/" text="Inicio" />
         <NavItem href="/blog" text="Blog" />
         <NavItem href="/snippets" text="Snippets" />
-        <NavItem href="/my-projects" text="Mis Proyectos" />
+        <NavItem href="/projects" text="Mis Proyectos" />
         <label className="flex items-center justify-center pt-1 -ml-1 rounded-lg hover:bg-gray-200 w-[40px] hover:cursor-pointer" htmlFor="web3-auth">
           <GrUserAdmin color="blue" />
         </label>

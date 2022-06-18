@@ -1,6 +1,6 @@
 import { Metadata, Wrapper } from 'components/common/Layout';
 import { SnippetCard } from 'components/ui/Snippets';
-import {getAllFilesMetadata} from '@lib/mdx';
+import { getAllFilesMetadata } from '@lib/mdx';
 
 
 const Snippets = ({ snippets }: any) => {
@@ -14,10 +14,14 @@ const Snippets = ({ snippets }: any) => {
         />
       }
     >
-
-      <h1 className="text-4xl font-bold">
-        Snippets
-      </h1>
+      <section aria-label="Header Section">
+        <h1 className="text-4xl font-bold">
+          Snippets
+        </h1>
+        <p className="mt-2">
+          Los snippets que comparto son pequeños extractos de código que te ayudan a mejorar tu entorno de programación. Encontrarás snippets de Solidity, Hardhat, NodeJs, PHP ó incluso CSS.
+        </p>
+      </section>
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
         {snippets.map(({ title, slug, icon }: any, index: number) => (

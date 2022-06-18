@@ -24,7 +24,7 @@ const Index = ({ posts, snippets }: Record<string, any >) => {
       <div className="flex flex-row mb-8 pt-16">
         <div className="w-full">
           <div className="w-full md:w-5/6 h-full flex flex-col gap-2 text-lg">
-            <div className="w-full text-5xl md:text-7xl whitespace-nowrap font-bold
+            <div className="w-full text-5xl lg:text-7xl whitespace-nowrap font-bold
             bg-gradient-to-r bg-clip-text  text-transparent
             from-indigo-500 via-purple-500 to-indigo-500
             animate-text

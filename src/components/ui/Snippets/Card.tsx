@@ -3,7 +3,7 @@ import React from 'react'
 import { BsArrowRight } from 'react-icons/bs';
 
 const Card = ({ title, slug, icon }: { title: string, slug: string, icon: string }) => {
-  const path = `./tech/technologies/${icon}.svg`;
+  const path = `../tech/technologies/${icon}.svg`;
 
   return (
     <div className="block py-4 px-2 w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 cursor-pointer">
