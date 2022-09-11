@@ -20,3 +20,7 @@ export const readingTimeToSpanish = (time: string) => {
   const plural = Number(readingTimeValue) > 1 ? 's' : '';
   return readingTimeValue + ` min${plural} de lectura`;
 }
+
+export const removeAccent = (stringInput: string) => {
+  return stringInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+}

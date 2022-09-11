@@ -51,3 +51,8 @@ export const getAllFilesMetadata = (securePath: string) => {
     ]
   }, [] as Array<Record<string, string>>)
 };
+
+export const getCoursesPath = (coursePath: string) => {
+  const files = getFiles(coursePath);
+  return fs.readFileSync(path.join(root, `data/courses/${coursePath}`), 'utf8')
+}

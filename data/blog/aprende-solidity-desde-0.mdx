@@ -1,0 +1,147 @@
+---
+title: 'Aprende solidity desde 0'
+publishedAt: '2022-09-10'
+summary: 'Te enseño los principios básico de solidity para que avances en tu carrera profesional'
+---
+
+En algunas ocasiones no sabemos por donde iniciar para aprender una nueva tecnología, buscamos y buscamos y lo que encontramos en videos o guías parece ser suficiente pero a medida que avanzamos nos damos cuenta de que no era suficiente y simplemente nos enseñaron apenas la punta del iceberg.
+
+Así que te guiaré para darte todo el material y el conocimiento posible para que seas un gran profesional y todo esto **GRATIS** que gusta más 😅.
+
+Pues nada... Vamos al lío. La primera parte que te explicaré es un coñazo, pero si no te la explico estaríamos en las mismas y sería un tutorial más de internet sin fundamentos. Así que agarrate de la silla porque toca aprender bien.
+
+# Fundamentos
+
+## ¿Qué es Solidity?
+
+Solidity es un lenguaje de programación orientado a la **EVM (Ethereum Virtual Machine)**. Este lenguaje fue diseñado para crear programas pero no cualquier tipo de programas, se diseñó principalmente para programar *Smart Contracts*.
+
+Solidity es un hibrido entre <LanguageLogo badge="true" language="c"/> y <LanguageLogo language="javascript"/>, coge lo bueno de *C* respecto al tipado fuerte y lo dinámico de *JavaScript*
+
+## ¿Por qué Solidity y no Vyper?
+
+Es cierto que existen alternativas tales como <LanguageLogo language="vyper"/>*yper*. Las diferencias más grande que podemos encontrar entre Solidity y Vyper es que Vyper tiene una sintaxis bastante más parecida a Python, también vyper tiene menor comunidad que Solidity pero ambos dos son capaces de hacer exactamente el mismo Smart Contract.
+
+Veamos como se vería el código en Solidity:
+
+```solidity:Solidity
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity ^0.8.4;
+
+contract Chat {
+
+    string message;
+
+		//set function
+    function setMessage( string memory _message) public {
+        message = _message;
+    }
+    //get function
+    function getMessage()public view returns(string memory) {
+        return message;
+    }
+
+}
+```
+
+Veamos como se vería en Vyper el mismo Smart Contract:
+
+```python:Vyper
+# @version ^0.2.12
+
+message: public(String[100])
+
+@external
+def setMessage(_message:String[100]):
+    self.message = _message
+
+@view
+@external
+def getMessage()->String[100]:
+    return self.message
+```
+
+<Divider/>
+
+# Tipos Primitivos
+
+Solidity es un lenguaje estrictamente tipado, vamos a dar un repaso para entender que quiere decir esto de _estrictamente tipado_.
+
+### Tipo Int / Uint
+
+En primera instancia tenemos los tipos ```int``` / ```uint```, que no son más que referencias a tipo numérico. Te preguntarás: ¿por qué hay dos tipos para el tipo numérico?, te explico:
+
+El tipo ```int``` hace referencia a números tanto negativos como positivos, al contrario que ```uint``` que hace referencia a _unsigned integer_ es decir **entero sin signo**, por tanto el valor que puede alberga el tipo ```uint``` va de 0 a ```2^256-1``` (un número muy muy largo), te dejaré dos tablas para que puedas ver cuales son los máximos números posibles en ambos tipos.
+
+
+```markdown:UINT
+uint		Digits	Max value
+-----------------------------
+uint8		  3		  255
+uint16		5		  65,535
+uint24		8		  16,777,215
+uint32		10		4,294,967,295
+uint40		13		1,099,511,627,775
+uint48		15		281,474,976,710,655
+uint56		17		72,057,594,037,927,935
+uint64		20		18,446,744,073,709,551,615
+uint72		22		4,722,366,482,869,645,213,695
+uint80		25		1,208,925,819,614,629,174,706,175
+uint88		27		309,485,009,821,345,068,724,781,055
+uint96		29		79,228,162,514,264,337,593,543,950,335
+...
+uint128		39		340,282,366,920,938,463,463,374,607,431,768,211,455
+...
+uint256		78		115,792,089,237,316,195,423,570,985,008,687,907,853,269,984,665,640,564,039,457,584,007,913,129,639,935
+```
+En el caso del tipo ```uint``` el valor mínimo es de 0 y el máximo es ```2^256-1``` tal como mencionamos anteriormente.
+
+```markdown:INT
+int		 Digits	 Max value
+-----------------------------
+int256    78    -57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,282,019,728,792,003,956,564,819,968
+...
+int256		78		57,896,044,618,658,097,711,785,492,504,343,953,926,634,992,332,820,282,019,728,792,003,956,564,819,968
+```
+
+Ahora veamos como sería el caso del tipo ```int```. Si nos fijamos detenidamente podemos ver que el tipo ```int256``` practicamente ha dado como resultado la mitad de números a en comparación al tipo ```uint256```. ¿Por qué ocurre esto?, ocurre porque el tipo ```int256``` debe ir en ambas direcciones tanto en la dirección de los números positivos como en la dirección de los números negativo por tanto si declaramos una variable con el tipo y bits ```int256``` lo que estariamos declarando tras banbalinas sería un ```uint128``` (en el caso de ser número positivo).
+
+- Puntos a tener en cuenta sobre los tipos ```uint/int```
+  - Como te habrás podido fijar después del tipo ```int``` y ```uint``` hay un número, este número hace referencia a los <Tooltip message="El bit hace referencia a la unidad mínima de información, 'binary digit'">bits</Tooltip> que podrá albergar dentro de sí misma.
+  - Por default los tipos ```int``` y ```uint``` siempre se inicializarán con una capacidad de 256 bits a menos que lo identifiquemos de otra manera.
+
+<Divider/>
+
+### Tipo Boolean
+
+<Image
+  alt={`Circuito`}
+  src={`/images/aprende-solidity-desde-0/circuito-electrico.jpg`}
+  width={782}
+  height={566}
+  priority
+/>
+
+Los tipos booleanos sirven para poder definir ```true``` o ```false``` según sea el caso. Este tipo primitivo es bastante sencillo así que vamos a intentar adentrarnos un poco más en ¿Cómo? y ¿Por qué?
+
+Si has ido leyendo detenidamente todo el post te habrás percatado sobre ¿qué son los bits?.
+Pues si nos vamos al caso técnico del tipo ```boolean``` podríamos decir que ```true/false``` son ```0``` y ```1``` donde true es igual a ```1``` y false es igual a ```0```.
+
+- Puntos a tener en cuenta:
+  - El tipo booleano solo le cuesta al sistema ```8 bits``` en solidity.
+  - El valor por defecto del tipo ```boolean``` es ```false```.
+
+#### Operadores lógicos
+
+<Tooltip message="Operador lógico NOT">!</Tooltip> → Retorna ```true``` si la condición is not satisfied else false
+
+<Tooltip message="Operador lógico AND">&&</Tooltip> → Retorna ```true``` si ambas condiciones son ```true``` y ```false``` si una o más condiciones son ```false```
+
+<Tooltip message="Operador lógico OR">||</Tooltip> → Retorna ```true``` si una o más condiciones son ```true``` y ```false``` cuando todas las condiciones son ```false```
+
+<Divider/>
+
+### Tipo Address
+
+El tipo primitivo ```address``` es característico de solidity y vyper ya que se usa única y exclusivamente para almacenar direcciones con un patrón binario concreto

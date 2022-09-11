@@ -1,7 +1,7 @@
 import React from 'react'
 import useSWR from 'swr'
 
-const ShowViews = ({slug, onlyNumber = false, ...props}: {slug: string, onlyNumber?: boolean}) => {
+const ShowViews = ({ slug, onlyNumber = false, ...props }: { slug: string, onlyNumber?: boolean }) => {
 
   async function fetchController<JSON = any>(
     input: RequestInfo,

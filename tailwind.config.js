@@ -7,9 +7,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        '1': '1',
+        '2': '2',
+        '3': '3',
+      },
       colors: {
         languages: {
-          lua: '#00007c'
+          lua: '#00007c',
+          c: '#a3b3c6',
+          javascript: '#efd81d'
         },
         ...colors
       },

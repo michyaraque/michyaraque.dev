@@ -1,0 +1,34 @@
+---
+title: 'Tipos booleanos'
+publishedAt: '2022-09-10'
+summary: 'Te enseño los principios básico de solidity para que avances en tu carrera profesional'
+---
+
+### Tipo Boolean
+
+<Image
+  alt={`Circuito`}
+  src={`/images/aprende-solidity-desde-0/circuito-electrico.jpg`}
+  width={782}
+  height={566}
+  priority
+/>
+
+Los tipos booleanos sirven para poder definir ```true``` o ```false``` según sea el caso. Este tipo primitivo es bastante sencillo así que vamos a intentar adentrarnos un poco más en ¿Cómo? y ¿Por qué?
+
+Si has ido leyendo detenidamente todo el post te habrás percatado sobre ¿qué son los bits?.
+Pues si nos vamos al caso técnico del tipo ```boolean``` podríamos decir que ```true/false``` son ```0``` y ```1``` donde true es igual a ```1``` y false es igual a ```0```.
+
+- Puntos a tener en cuenta:
+  - El tipo booleano solo le cuesta al sistema ```8 bits``` en solidity.
+  - El valor por defecto del tipo ```boolean``` es ```false```.
+
+#### Operadores lógicos
+
+<Tooltip message="Operador lógico NOT">!</Tooltip> → Retorna ```true``` si la condición is not satisfied else false
+
+<Tooltip message="Operador lógico AND">&&</Tooltip> → Retorna ```true``` si ambas condiciones son ```true``` y ```false``` si una o más condiciones son ```false```
+
+<Tooltip message="Operador lógico OR">||</Tooltip> → Retorna ```true``` si una o más condiciones son ```true``` y ```false``` cuando todas las condiciones son ```false```
+
+<Divider/>

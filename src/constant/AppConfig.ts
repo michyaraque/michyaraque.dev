@@ -1,7 +1,6 @@
 export const AppConfig = {
-    site_name: 'Michael\'s Portfolio',
-    title: 'Michael\'s Portfolio',
-    description: 'Michael\'s Portfolio',
+    site_name: 'Michael Araque',
+    title: 'Michael Araque',
+    description: 'Michael Araque',
     locale: 'es',
   };
-  

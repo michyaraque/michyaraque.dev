@@ -43,6 +43,7 @@ const Navbar = () => {
       <div className="flex gap-4">
         <NavItem href="/" text="Inicio" />
         <NavItem href="/blog" text="Blog" />
+        <NavItem href="/courses" text="Cursos" />
         <NavItem href="/snippets" text="Snippets" />
         <NavItem href="/projects" text="Mis Proyectos" />
         <label className="flex items-center justify-center pt-1 -ml-1 rounded-lg hover:bg-gray-200 w-[40px] hover:cursor-pointer" htmlFor="web3-auth">
