@@ -48,6 +48,7 @@ const ClassCard = (props: any) => {
       <section className="flex flex-col gap-4">
         {data.map((data: { slug: string; frontmatter: any; classSummary: string }, index: number) => {
           return <ClassBox
+            key={index}
             moduleNumber={moduleNumber}
             title={data.classSummary}
             readingTime={data.frontmatter.readingTime.text}
