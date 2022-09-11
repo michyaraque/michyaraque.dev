@@ -8,6 +8,7 @@ import rehypeCodeTitles from 'rehype-code-titles';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkCodeTitles from './remark-code-title'
 import readingTime from 'reading-time';
+import { cleanSlug } from 'utils';
 
 const options = {
   mdxOptions: {
@@ -73,7 +74,7 @@ export const getCoursesPath = () => {
       return [
         {
           path_name: path.name,
-          beauty_path_name: path.name.charAt(0).toUpperCase() + path.name.slice(1).toLowerCase().replaceAll('-', ' ')
+          beauty_path_name: cleanSlug(path.name)
         }, ...arr];
     }, [])
 
