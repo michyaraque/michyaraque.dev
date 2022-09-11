@@ -54,11 +54,11 @@ export const getFileBySlug = async (slug: string, securePath: string) => {
 export const getAllFilesMetadata = (securePath: string) => {
   const files = getFiles(securePath);
 
-  return files.reduce((allPosts: Array<Record<string, string>>, postSlug: string) => {
+  return files.reduce((allPosts: Array<Record<string, any>>, postSlug: string) => {
     const mdxSource = fs.readFileSync(path.join(root, `data/${securePath}`, postSlug), 'utf8');
     const { data } = matter(mdxSource);
     return [
-      { ...data, slug: postSlug.replace('.mdx', '') }, ...allPosts
+      { ...data, slug: postSlug.replace('.mdx', ''),  frontmatter: {readingTime: readingTime(mdxSource)}}, ...allPosts
     ]
   }, [])
 };

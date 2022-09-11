@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link';
 import { MDXRemote } from 'next-mdx-remote'
 
-import { getCoursesPath, getFileBySlug, getFiles } from '../../../../../lib/mdx'
+import { getCoursesPath, getFileBySlug, getFiles } from '@lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
-import { readingTimeToSpanish, slugToHex, styledDate } from 'utils';
+import { cleanSlug, slugToHex } from 'utils';
 
-export default function Post({ source, frontmatter }: any) {
+export default function Post({ slug, source, frontmatter }: any) {
   const [views, setViews] = useState<string | number>('----');
 
   useEffect(() => {
@@ -28,31 +29,18 @@ export default function Post({ source, frontmatter }: any) {
     <Wrapper
       meta={<Metadata title={frontmatter.title} description="test" />}
     >
-      <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 " style={{
+      <div className="text-sm breadcrumbs">
+        <ul>
+          <li><Link href={`/courses/${slug}`}><a>{cleanSlug(slug)}</a></Link></li>
+          <li className="text-slate-400 cursor-not-allowed">{frontmatter.classSummary}</li>
+        </ul>
+      </div>
+
+      <div className="w-full h-full rounded-lg px-4 md:px-10 py-6 relative" style={{
         backgroundColor: slugToHex(frontmatter.slug),
       }}>
-        <h1 className="text-2xl md:text-5xl text-white font-bold">{frontmatter.title}</h1>
-
-        <div className="text-white flex justify-between mt-4">
-
-          <div className="flex items-center">
-            <img src="/me.jpg" alt="Michael Araque's face" className="w-[36px] rounded-full border-2 p-0.5" />
-            <div className="text-base ml-2 flex flex-col md:flex-row md:gap-2">
-              <p>Michael Araque</p>
-              <span className="hidden md:inline"> | </span>
-              <p>{styledDate(frontmatter.publishedAt)}</p>
-            </div>
-          </div>
-          <div className="text-base flex flex-col items-end md:items-end">
-
-            <p className="ml-1">
-              {views && views} visitas
-            </p>
-            <p>
-              {readingTimeToSpanish(frontmatter.readingTime.text)}
-            </p>
-          </div>
-        </div>
+        <h1 className="text-2xl md:text-5xl text-white font-bold text-center">{frontmatter.title}</h1>
+        <h2 className="text-center text-slate-200">{frontmatter.classSummary}</h2>
       </div>
       <MDXRemote {...source} components={MDXComponents} />
     </Wrapper>
@@ -67,9 +55,9 @@ export async function getStaticPaths() {
     path_name
   }))
 
-  const allPaths: Array<{params: {class: string, slug: string}}> = [];
+  const allPaths: Array<{ params: { class: string, slug: string } }> = [];
 
-  coursePaths.forEach((relativePath: {path_name: string}) => {
+  coursePaths.forEach((relativePath: { path_name: string }) => {
     const post = getFiles(`courses/${relativePath.path_name}`)
     post.forEach((file: string) => {
       allPaths.push(
@@ -93,6 +81,7 @@ export async function getStaticProps({ params }: any) {
   const { source, frontmatter }: any = await getFileBySlug(params.class, `courses/${params.slug}`)
   return {
     props: {
+      slug: params.slug,
       source,
       frontmatter: {
         class: params.class,

@@ -28,3 +28,16 @@ export const removeAccent = (stringInput: string) => {
 export const cleanSlug = (stringInput: string) => {
   return stringInput.charAt(0).toUpperCase() + stringInput.slice(1).toLowerCase().replaceAll('-', ' ')
 }
+
+export const groupBy = (data: any, filter: any) => {
+  let objectGrouped: any = []
+  data.forEach((x: any) => {
+    if (!objectGrouped.hasOwnProperty(x[filter])) {
+      objectGrouped[x[filter]] = []
+    }
+
+    objectGrouped[x[filter]].push({ ...x })
+
+  })
+  return objectGrouped;
+}

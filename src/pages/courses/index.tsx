@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { getAllFilesMetadata, getCoursesPath } from '../../../lib/mdx';
 import ShowViews from 'components/ShowViews';
 import { AiFillEye, AiOutlineEye } from 'react-icons/ai';
+import { slugToHex } from 'utils';
 
 const Courses = ({ courses }: { courses: string[] }) => {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -37,20 +38,28 @@ const Courses = ({ courses }: { courses: string[] }) => {
 
       <div className="mt-4 grid">
         <h3 className="mb-4">Todos los cursos</h3>
-        <section className="grid grid-cols-2">
+        <section className="grid grid-rows md:grid-cols-2">
 
           {courses.map(({ path_name, beauty_path_name }: any, index: number) => (
             <div key={index}>
 
               <Link href={`/courses/${path_name}`}>
                 <a>
-                  <div className={`block border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}>
+                  <div className={`block border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border border-gray-800 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}
+                    style={{ borderColor: slugToHex(path_name) }}>
 
                     <p className="font-normal text-gray-700 dark:text-gray-400">
                       {beauty_path_name}
                     </p>
-                    <div className="flex items-center text-base bottom-2 right-4 absolute">
-
+                    <div className="flex items-center text-base bottom-2 left-4 absolute">
+                      <span>Dificultad: </span>
+                      <div className="rating">
+                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" checked/>
+                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400"  />
+                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+                      </div>
                     </div>
                   </div>
                 </a>

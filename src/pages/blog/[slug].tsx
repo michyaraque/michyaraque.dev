@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 
-import { getFileBySlug, getFiles } from '../../../lib/mdx'
+import { getFileBySlug, getFiles } from '@lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
 import { readingTimeToSpanish, slugToHex, styledDate } from 'utils';
