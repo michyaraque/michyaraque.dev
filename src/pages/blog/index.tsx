@@ -66,7 +66,7 @@ export default Blog;
 
 export async function getStaticProps() {
 
-  const posts = await getAllFilesMetadata("blog");
+  const posts = getAllFilesMetadata("blog");
 
   return {
     props: { posts }

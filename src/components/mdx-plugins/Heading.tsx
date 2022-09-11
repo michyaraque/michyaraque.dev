@@ -16,7 +16,7 @@ type IHeading = {
  * @returns A React component
  */
 const HeadingMaster = (props: IHeading) => {
-  const { id, useAnchor = true, headingType, size, children, ...rest } = props;
+  const { id, useAnchor = true, headingType, size, ...rest } = props;
 
   if (id && useAnchor) {
     let validId = removeAccent(id);
@@ -32,29 +32,29 @@ const HeadingMaster = (props: IHeading) => {
               "span",
               { className: "anchor" }
             ),
-            children
+            props.children
           )}
         </a>
       </Link>
     );
   }
   return <>
-    {React.createElement(headingType, {...rest})}
+    {React.createElement(headingType, { ...rest })}
   </>;
 }
 
 export const H1 = ({ id, children }: IHeading) => {
-  return <HeadingMaster id={id} children={children} headingType="h1" size="text-4xl" />
+  return <HeadingMaster id={id} headingType="h1" size="text-4xl" >{children}</HeadingMaster>
 };
 
 export const H2 = ({ id, children }: IHeading) => {
-  return <HeadingMaster id={id} children={children} headingType="h2" size="text-2xl" />
+  return <HeadingMaster id={id} headingType="h2" size="text-2xl" >{children}</HeadingMaster>
 };
 
 export const H3 = ({ id, children }: IHeading) => {
-  return <HeadingMaster id={id} children={children} headingType="h3" size="text-xl" />
+  return <HeadingMaster id={id} headingType="h3" size="text-xl" >{children}</HeadingMaster>
 };
 
 export const H4 = ({ id, children }: IHeading) => {
-  return <HeadingMaster id={id} children={children} headingType="h4" size="text-lg" />
+  return <HeadingMaster id={id} headingType="h4" size="text-lg" >{children}</HeadingMaster>
 };

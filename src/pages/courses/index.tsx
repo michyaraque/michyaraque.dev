@@ -7,12 +7,8 @@ import { getAllFilesMetadata, getCoursesPath } from '../../../lib/mdx';
 import ShowViews from 'components/ShowViews';
 import { AiFillEye, AiOutlineEye } from 'react-icons/ai';
 
-const Courses = ({ posts }: any) => {
+const Courses = ({ courses }: { courses: string[] }) => {
   const [searchValue, setSearchValue] = useState<string>('');
-
-  const filteredCoursesPosts = posts.filter((post: any) =>
-    post.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
 
   return (
     <Wrapper
@@ -23,7 +19,6 @@ const Courses = ({ posts }: any) => {
         />
       }
     >
-
       <h1 className="text-4xl font-bold">
         Cursos
       </h1>
@@ -42,20 +37,28 @@ const Courses = ({ posts }: any) => {
 
       <div className="mt-4 grid">
         <h3 className="mb-4">Todos los cursos</h3>
-        {filteredCoursesPosts.map(({ title, slug, summary }: any, index: number) => (
-          <div key={index} className="hover:bg-slate-100 hover:rounded-md p-4">
-            <Link href={`/courses/${slug}`}>
-              <a className="relative">
-                <h2 className="text-2xl font-bold">{title}</h2>
-                <p className="text-slate-500 text-lg">{summary}</p>
-                  <div className="flex items-center text-base top-0 right-4 absolute">
+        <section className="grid grid-cols-2">
 
-                    <ShowViews slug={slug} />
+          {courses.map(({ path_name, beauty_path_name }: any, index: number) => (
+            <div key={index}>
+
+              <Link href={`/courses/${path_name}`}>
+                <a>
+                  <div className={`block border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}>
+
+                    <p className="font-normal text-gray-700 dark:text-gray-400">
+                      {beauty_path_name}
+                    </p>
+                    <div className="flex items-center text-base bottom-2 right-4 absolute">
+
+                    </div>
                   </div>
-              </a>
-            </Link>
-          </div>
-        ))}
+                </a>
+              </Link>
+            </div>
+          ))}
+        </section>
+
       </div>
 
     </Wrapper>
@@ -65,10 +68,8 @@ const Courses = ({ posts }: any) => {
 export default Courses;
 
 export async function getStaticProps() {
-
-  const posts = await getAllFilesMetadata("courses/aprende-solidity-desde-0");
-  console.log(await getCoursesPath('aprende-solidity-desde-0'));
+  const courses = getCoursesPath();
   return {
-    props: { posts }
+    props: { courses }
   }
 }

@@ -24,3 +24,7 @@ export const readingTimeToSpanish = (time: string) => {
 export const removeAccent = (stringInput: string) => {
   return stringInput.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
 }
+
+export const cleanSlug = (stringInput: string) => {
+  return stringInput.charAt(0).toUpperCase() + stringInput.slice(1).toLowerCase().replaceAll('-', ' ')
+}

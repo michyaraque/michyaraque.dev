@@ -1,0 +1,67 @@
+---
+title: 'Fundamentos básicos'
+publishedAt: '2022-09-10'
+summary: 'Te enseño los principios básico de solidity para que avances en tu carrera profesional'
+modulo: 0
+moduloName: 'Fundamentos'
+classSummary: 'Fundamentos básicos'
+---
+
+
+En algunas ocasiones no sabemos por donde iniciar para aprender una nueva tecnología, buscamos y buscamos y lo que encontramos en videos o guías parece ser suficiente pero a medida que avanzamos nos damos cuenta de que no era suficiente y simplemente nos enseñaron apenas la punta del iceberg.
+
+Así que te guiaré para darte todo el material y el conocimiento posible para que seas un gran profesional y todo esto **GRATIS** que gusta más 😅.
+
+Pues nada... Vamos al lío. La primera parte que te explicaré es un coñazo, pero si no te la explico estaríamos en las mismas y sería un tutorial más de internet sin fundamentos. Así que agarrate de la silla porque toca aprender bien.
+
+# Fundamentos
+
+## ¿Qué es Solidity?
+
+Solidity es un lenguaje de programación orientado a la **EVM (Ethereum Virtual Machine)**. Este lenguaje fue diseñado para crear programas pero no cualquier tipo de programas, se diseñó principalmente para programar *Smart Contracts*.
+
+Solidity es un hibrido entre <LanguageLogo badge="true" language="c"/> y <LanguageLogo language="javascript"/>, coge lo bueno de *C* respecto al tipado fuerte y lo dinámico de *JavaScript*
+
+## ¿Por qué Solidity y no Vyper?
+
+Es cierto que existen alternativas tales como <LanguageLogo language="vyper"/>*yper*. Las diferencias más grande que podemos encontrar entre Solidity y Vyper es que Vyper tiene una sintaxis bastante más parecida a Python, también vyper tiene menor comunidad que Solidity pero ambos dos son capaces de hacer exactamente el mismo Smart Contract.
+
+Veamos como se vería el código en Solidity:
+
+```solidity:Solidity
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity ^0.8.4;
+
+contract Chat {
+
+    string message;
+
+		//set function
+    function setMessage( string memory _message) public {
+        message = _message;
+    }
+    //get function
+    function getMessage()public view returns(string memory) {
+        return message;
+    }
+
+}
+```
+
+Veamos como se vería en Vyper el mismo Smart Contract:
+
+```python:Vyper
+# @version ^0.2.12
+
+message: public(String[100])
+
+@external
+def setMessage(_message:String[100]):
+    self.message = _message
+
+@view
+@external
+def getMessage()->String[100]:
+    return self.message
+```

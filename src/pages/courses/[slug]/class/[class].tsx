@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { MDXRemote } from 'next-mdx-remote'
 
-import { getFileBySlug, getFiles } from '../../../lib/mdx'
+import { getCoursesPath, getFileBySlug, getFiles } from '../../../../../lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
 import { readingTimeToSpanish, slugToHex, styledDate } from 'utils';
 
 export default function Post({ source, frontmatter }: any) {
-  const [views, setViews] = useState<string|number>('----');
+  const [views, setViews] = useState<string | number>('----');
 
   useEffect(() => {
     (async () => {
@@ -60,26 +60,42 @@ export default function Post({ source, frontmatter }: any) {
 }
 
 export async function getStaticPaths() {
-  const posts = await getFiles("courses");
-  const paths = posts.map((post) => ({
-    params: {
-      slug: post.replace(/\.mdx/, '')
-    }
+
+  const courses = getCoursesPath();
+
+  const coursePaths = courses.map(({ path_name }) => ({
+    path_name
   }))
+
+  const allPaths: Array<{params: {class: string, slug: string}}> = [];
+
+  coursePaths.forEach((relativePath: {path_name: string}) => {
+    const post = getFiles(`courses/${relativePath.path_name}`)
+    post.forEach((file: string) => {
+      allPaths.push(
+        {
+          params: {
+            class: file.replace(/\.mdx/, ''),
+            slug: relativePath.path_name
+          }
+        })
+
+    })
+  })
+
   return {
-    paths,
+    paths: allPaths,
     fallback: false
   }
 }
 
 export async function getStaticProps({ params }: any) {
-  const { source, frontmatter }: any = await getFileBySlug(params.slug, "courses")
-
+  const { source, frontmatter }: any = await getFileBySlug(params.class, `courses/${params.slug}`)
   return {
     props: {
       source,
       frontmatter: {
-        slug: params.slug,
+        class: params.class,
         readingTime: frontmatter.readingTime,
         ...frontmatter
       }

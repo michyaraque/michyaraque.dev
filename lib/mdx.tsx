@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs, { readdirSync } from 'fs';
 import path from 'path';
 import matter from "gray-matter";
 import { serialize } from 'next-mdx-remote/serialize';
@@ -25,9 +25,9 @@ const root = process.cwd();
 
 export const getFiles = (securePath: string) => fs.readdirSync(path.join(root, `data/${securePath}`));
 
-export const getFileBySlug = async ( slug: string, securePath: string ) => {
+export const getFileBySlug = async (slug: string, securePath: string) => {
   const mdxSource = fs.readFileSync(path.join(root, `data/${securePath}`, `${slug}.mdx`), 'utf8');
-  const {data, content} = await matter(mdxSource);
+  const { data, content } = await matter(mdxSource);
   const source = await serialize(content, options)
 
   return {
@@ -40,19 +40,58 @@ export const getFileBySlug = async ( slug: string, securePath: string ) => {
   }
 }
 
+/**
+ * It takes a path to a directory, gets all the files in that directory, and then returns an array of
+ * objects that contain the metadata from each file
+ * @param {string} securePath - This is the path to the directory where the files are located.
+ * @returns An array of objects with the following properties:
+ *   - slug
+ *   - title
+ *   - publishedAt
+ *   - summary
+ */
 export const getAllFilesMetadata = (securePath: string) => {
   const files = getFiles(securePath);
 
-  return files.reduce((allPosts, postSlug) => {
+  return files.reduce((allPosts: Array<Record<string, string>>, postSlug: string) => {
     const mdxSource = fs.readFileSync(path.join(root, `data/${securePath}`, postSlug), 'utf8');
     const { data } = matter(mdxSource);
     return [
-      {...data, slug: postSlug.replace('.mdx', '')}, ...allPosts
+      { ...data, slug: postSlug.replace('.mdx', '') }, ...allPosts
     ]
-  }, [] as Array<Record<string, string>>)
+  }, [])
 };
 
-export const getCoursesPath = (coursePath: string) => {
-  const files = getFiles(coursePath);
-  return fs.readFileSync(path.join(root, `data/courses/${coursePath}`), 'utf8')
+/**
+ * It returns an array of objects that contain the real path and the beauty path name of each course
+ * @returns An array of objects with two keys: path_name and beauty_path_name.
+ */
+export const getCoursesPath = () => {
+  const coursePaths = fs.readdirSync(path.join(root, `data/courses`), { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .reduce((arr: Array<Record<string, string>>, path: fs.Dirent) => {
+      return [
+        {
+          path_name: path.name,
+          beauty_path_name: path.name.charAt(0).toUpperCase() + path.name.slice(1).toLowerCase().replaceAll('-', ' ')
+        }, ...arr];
+    }, [])
+
+  return coursePaths;
+}
+
+export const getAllFilesMetadataByCourseModules = (securePath: string) => {
+  const files = getFiles(securePath);
+
+  return files.reduce((allPosts: Array<Record<string, string>>, postSlug: string) => {
+    const mdxSource = fs.readFileSync(path.join(root, `data/${securePath}`, postSlug), 'utf8');
+    const { data } = matter(mdxSource);
+    return [
+      { ...data, slug: postSlug.replace('.mdx', '') }, ...allPosts
+    ]
+  }, [])
+};
+
+export const getCourseFiles = (securePath: string) => {
+  return fs.readdirSync(path.join(root, `data/${securePath}`))
 }
