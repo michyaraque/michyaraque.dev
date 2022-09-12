@@ -16,6 +16,7 @@ const withMDX = nextMDX({
 })
 
 export default withMDX({
+  trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
