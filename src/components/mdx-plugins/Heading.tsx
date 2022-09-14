@@ -26,7 +26,8 @@ const HeadingMaster = (props: IHeading) => {
           {React.createElement(
             headingType,
             {
-              className: `${size} font-bold text-slate-700 my-4`
+              className: `${size} font-bold text-slate-700 my-4`,
+              id: validId
             },
             React.createElement(
               "span",

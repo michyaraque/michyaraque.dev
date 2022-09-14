@@ -21,7 +21,7 @@ const Index = ({ posts, snippets }: Record<string, any >) => {
         />
       }
     >
-      <div className="flex flex-row mb-8 pt-16">
+      <div className="flex flex-row mb-8 md:pt-16">
         <div className="w-full">
           <div className="w-full md:w-5/6 h-full flex flex-col gap-2 text-lg">
             <div className="w-full text-5xl lg:text-7xl whitespace-nowrap font-bold
