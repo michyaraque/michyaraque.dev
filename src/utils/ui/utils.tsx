@@ -31,12 +31,12 @@ export const cleanSlug = (stringInput: string) => {
 
 export const groupBy = (data: any, filter: any) => {
   let objectGrouped: any = []
-  data.forEach((x: any) => {
-    if (!objectGrouped.hasOwnProperty(x[filter])) {
-      objectGrouped[x[filter]] = []
+  data.forEach((item: any) => {
+    if (!objectGrouped.hasOwnProperty(item[filter])) {
+      objectGrouped[item[filter]] = []
     }
 
-    objectGrouped[x[filter]].push({ ...x })
+    objectGrouped[item[filter]].push({ ...item })
 
   })
   return objectGrouped;
