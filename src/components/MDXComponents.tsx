@@ -1,4 +1,3 @@
-import Technology from "./Technology";
 import LanguageLogo from "./LanguageLogo";
 import { Pre, Link, Image, Divider } from "./mdx-plugins";
 import Tooltip from "./Tooltip";
@@ -15,7 +14,6 @@ export default {
   p: (props: any) => <p className="my-6 text-[18px] font-regular" {...props} />,
   blockquote: (props: any) => <blockquote className="border-l-8" {...props} />,
   li: (props: any) => <li className="text-lg ml-5 list-[square]" {...props} />,
-  Technology: (props: any) => <Technology {...props} />,
   LanguageLogo: (props: any) => <LanguageLogo {...props} />,
   Tooltip: (props: any) => <Tooltip {...props} />,
   Divider: (props: any) => <Divider {...props} />,
