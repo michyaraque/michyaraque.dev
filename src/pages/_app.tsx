@@ -6,7 +6,7 @@ import defaultSEOConfig from '../../next-seo.config';
 function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <span className="h-[40px] font-bold bg-gray-200 w-full flex justify-center items-center">
+      <span className="h-[40px] font-bold bg-gray-600 w-full flex justify-center items-center">
         🚧 Sitio en construcción, poco a poco 🚧
       </span>
       <DefaultSeo {...defaultSEOConfig} />
