@@ -11,7 +11,7 @@ const defaultSEOConfig = {
     description: "Crea, construye y disfruta, recuerda que lo díficil solo cuesta un poco más",
     images: [
       {
-        url: "",
+        url: "https://michyaraque.dev/images/banner.jpg",
         alt: "Michael Araque's Blog",
       },
     ],

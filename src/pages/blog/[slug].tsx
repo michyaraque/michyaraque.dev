@@ -26,7 +26,7 @@ export default function Post({ source, frontmatter }: any) {
 
   return (
     <Wrapper
-      meta={<Metadata title={frontmatter.title} description="test" />}
+      meta={<Metadata title={frontmatter.title} description="Blog de software y curiosidades." />}
     >
       <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 " style={{
         backgroundColor: slugToHex(frontmatter.slug),
