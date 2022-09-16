@@ -5,6 +5,7 @@
   "scripts": {
     "build:dev": "cp .env.development .env.local && next build && next export",
     "build:prod": "cp .env.production .env.local && next build && next export",
+    "export": "next build && next export",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

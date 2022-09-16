@@ -1,5 +1,96 @@
 import { Wrapper, Metadata } from 'components/common/Layout'
+import LanguageLogo from 'components/LanguageLogo';
+import Link from 'next/link';
 import React from 'react'
+import { FaGithub } from 'react-icons/fa';
+import { TbWorld } from 'react-icons/tb';
+
+const workProjects = [
+  {
+    title: "$FXD Token Smart Contract",
+    description: "Token diseñado para ser usado como moneda de governanza junto a un Timelock y control de ciertas propiedades bajo un sistema multisig",
+    image: "fxd_token.jpg",
+    link: "https://github.com/Foxtrot-Command/fxd-contract",
+    technologies: ["solidity", "typescript", "chai", "waffle"]
+  },
+  {
+    title: "ICO Platform",
+    description: "Plataforma diseñada para interactuar con smart contracts, el usuario es capaz de invertir de forma totalmente automática y también de recoger su recompensa que se calcula a través de un Smart Contract segundo por segundo",
+    image: "ico_platform.jpg",
+    link: "https://private1.foxtrotcommand.com",
+    technologies: ["nextjs", "reactjs", "typescript"]
+  },
+];
+
+const sideProjects = [
+  {
+    title: "CGrabber",
+    description: "Bot creado para Telegram con funcionalidades y herramientas enfocadas al marketing de afiliados",
+    image: "cgrabber.jpg",
+    link: "https://chollx.es",
+    technologies: ["php", "stripe", "regex"]
+  },
+  {
+    title: "Smart Contract Boilerplate",
+    description: "Boilerplate creado para iniciar a programar de forma rápida y efectiva",
+    image: "smart_contract_boilerplate.jpg",
+    link: "https://github.com/michyaraque/smart-contract-boilerplate",
+    technologies: ["typescript", "solidity", "hardhat", "chai", "waffle"]
+  },
+  {
+    title: "Simple Telegram Bot",
+    description: "Librería desarrollada y diseñada para ser usada por otros desarrolladores de bots de telegram. La librería fue creada bajo el principio de `Chained Class`",
+    image: "simple_telegram_bot.jpg",
+    link: "https://github.com/michyaraque/SimpleTelegramBotV2",
+    technologies: ["php"]
+  }
+];
+
+const ProjectStats = ({ technologies }: any) => {
+  return (
+    <div className="flex flex-row gap-2 m-auto content-end">
+      <span className="my-auto text-center text-base">Tecnologías usadas: </span>
+      <div className="flex flex-row justify-end gap-2">
+
+        {technologies.map((language: string, index: number) => (
+          <LanguageLogo key={index} language={language} className="!w-7 !h-7" />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+const ProjectCard = ({ image, title, description, technologies, link}: any) => {
+  return (
+    <>
+      <article className="w-100 min-h-96h h-auto pb-7 bg-gray-100 rounded-lg">
+        <div className="p-4 relative">
+
+
+
+          <img className="h-40 w-full object-cover object-center rounded-lg" src={`/images/projects/${image}`} alt="CGrabber project" />
+        </div>
+
+        <div className="flex flex-col gap-3 mx-4">
+          <div className="flex flex-row gap-4">
+            <span className="font-bold text-slate-700">{title}</span>
+            <span className="w-10 h-10 my-auto hover:opacity-90">
+              <Link href={link}>
+                <a target="_blank" rel="noreel">
+                  {link.includes('github') ? <FaGithub size={26} /> : <TbWorld size={26} />}
+                </a>
+              </Link>
+            </span>
+          </div>
+          <span className="font-light text-md">{description}</span>
+        </div>
+          <div className="mt-6 mx-4">
+            <ProjectStats technologies={technologies} />
+          </div>
+      </article>
+    </>
+  )
+}
 
 const projects = () => {
   return (
@@ -11,15 +102,46 @@ const projects = () => {
         />
       }
     >
-      <section aria-label="Header Section">
-        <h1 className="text-4xl font-bold">
-          Mis Proyectos
-        </h1>
-        <p className="mt-2">
+      <div className="flex flex-col gap-6">
+        <div>
+          <h1 className="text-4xl font-bold">
+            Trabajos
+          </h1>
 
-        </p>
-      </section>
-      </Wrapper>
+          <section className="mt-6 grid grid-cols md:grid-cols-2 gap-6">
+            {workProjects.map((item, index: number) => (
+              <ProjectCard
+                key={index}
+                image={item.image}
+                title={item.title}
+                description={item.description}
+                technologies={item.technologies}
+                link={item.link}
+              />
+            ))}
+          </section>
+        </div>
+
+        <div className="mt-10">
+          <h1 className="text-4xl font-bold">
+            Proyectos/Hobbie
+          </h1>
+
+          <section className="mt-6 grid grid-cols md:grid-cols-2 gap-6">
+            {sideProjects.map((item, index: number) => (
+              <ProjectCard
+                key={index}
+                image={item.image}
+                title={item.title}
+                description={item.description}
+                technologies={item.technologies}
+                link={item.link}
+              />
+            ))}
+          </section>
+        </div>
+      </div>
+    </Wrapper>
   )
 }
 

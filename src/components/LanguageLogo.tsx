@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IconType } from "react-icons/lib";
-import { SiC, SiJavascript, SiLua, SiSolidity } from "react-icons/si";
+import { SiC, SiJavascript, SiLua, SiPhp, SiReact, SiSolidity, SiTypescript } from "react-icons/si";
+import { VscRegex } from "react-icons/vsc";
+import {TbBrandNextjs} from 'react-icons/tb';
 import Link from "next/link";
 import { GoLinkExternal } from "react-icons/go";
+import { FaCcStripe } from "react-icons/fa";
+import tailwind from './../../tailwind.config'
 
 type ILanguageLogo = {
   language: string;
@@ -23,55 +27,98 @@ type ILanguageItems = {
 };
 
 /* It's a type definition for the LanguageItems object. */
+
+const brands: ILanguageItems = {
+  stripe: {
+    icon: FaCcStripe,
+    color: "technology-stripe",
+    tooltip: "Stripe Payments SaaS",
+    link: "https://stripe.com/",
+  },
+  hardhat: {
+    icon: "/tech/technologies/hardhat.svg",
+    color: "technology-hardhat",
+    tooltip: "Hardhat Labs",
+    link: "https://hardhat.org",
+  },
+}
+
 const LanguageItems: ILanguageItems = {
+  ...brands,
   lua: {
     icon: SiLua,
-    color: "text-languages-lua",
+    color: "languages-lua",
     tooltip: "Lua Lang",
     link: "https://www.lua.org/",
   },
   c: {
     icon: SiC,
-    color: "text-languages-c",
+    color: "languages-c",
     tooltip: "C Lang",
     link: "https://www.cprogramming.com/",
   },
   javascript: {
     icon: SiJavascript,
-    color: "text-languages-javascript",
+    color: "languages-javascript",
     tooltip: "JavaScript Lang",
     link: "https://www.javascript.com/",
   },
   vyper: {
     icon: "/tech/technologies/vyper.svg",
-    color: "text-languages-javascript",
+    color: "languages-vyper",
     tooltip: "Vyper Lang",
     link: "https://vyper.readthedocs.io/en/stable/",
   },
-  hardhat: {
-    icon: "/tech/technologies/hardhat.svg",
-    color: "text-technology-hardhat",
-    tooltip: "Hardhat Labs",
-    link: "https://hardhat.org",
+  solidity: {
+    icon: SiSolidity,
+    color: "languages-solidity",
+    tooltip: "Solidity Language",
+    link: "https://solidity.readthedocs.io/",
   },
+  php: {
+    icon: SiPhp,
+    color: "languages-php",
+    tooltip: "PHP Language",
+    link: "https://www.php.net/",
+  },
+  typescript: {
+    icon: SiTypescript,
+    color: "languages-typescript",
+    tooltip: "Typescript Language",
+    link: "https://typescriptlang.org/",
+  },
+  regex: {
+    icon: VscRegex,
+    color: "languages-regex",
+    tooltip: "Regular Expressions",
+    link: "https://en.wikipedia.org/wiki/Regular_expression",
+  },
+
   chai: {
     icon: "/tech/technologies/chai.svg",
-    color: "text-technology-chai",
+    color: "technology-chai",
     tooltip: "BDD/TDD Assertion Library",
     link: "https://www.chaijs.com/",
   },
   waffle: {
     icon: "/tech/technologies/waffle.svg",
-    color: "text-technology-chai",
+    color: "technology-chai",
     tooltip: "Waffle Test Technology",
     link: "https://ethereum-waffle.readthedocs.io/",
   },
-  solidity: {
-    icon: SiSolidity,
-    color: "text-language-solidity",
-    tooltip: "Solidity Language",
-    link: "https://solidity.readthedocs.io/",
+  reactjs: {
+    icon: SiReact,
+    color: "technology-reactjs",
+    tooltip: "ReactJS Library",
+    link: "https://reactjs.org/",
   },
+  nextjs: {
+    icon: TbBrandNextjs,
+    color: "technology-nextjs",
+    tooltip: "Nextjs Framework",
+    link: "https://nextjs.org/",
+  }
+
 };
 
 /**
@@ -89,22 +136,27 @@ const LanguageLogo = ({
   version,
   ...props
 }: ILanguageLogo) => {
+
   return (
     <span
-      className={`${useLink && "flex flex-row mb-1"} ${
+      className={`${useLink ? "flex flex-row mb-1" : ''} ${
         badge ? "badge badge-secondary" : ""
       }`}
     >
       <span data-tip={LanguageItems[language].tooltip} className="tooltip">
         {typeof LanguageItems[language].icon !== "string" ? (
           React.createElement(LanguageItems[language].icon as IconType | any, {
-            className: `inline-block ${LanguageItems[language].color} ${className}`,
+            className: `inline-block ${className ? className : ''}`,
+            style: {
+              fill: tailwind.theme.extend.colors.technologies[language],
+              color: tailwind.theme.extend.colors.technologies[language]
+            }
           })
         ) : (
           <img
             src={LanguageItems[language].icon as string}
             alt={LanguageItems[language].tooltip}
-            className={`inline-block w-5 h-5 pointer-events-none  ${className}`}
+            className={`inline-block w-5 h-5 pointer-events-none  ${className ? className : ''}`}
           />
         )}
       </span>
@@ -116,7 +168,7 @@ const LanguageLogo = ({
               {version !== undefined && (
                 <span className="ml-2 text-base">{`[v${version}]`}</span>
               )}
-              <GoLinkExternal className="text-base ml-2 inline-block" />
+              <GoLinkExternal className="base ml-2 inline-block" />
             </p>
           </a>
         </Link>

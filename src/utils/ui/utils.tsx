@@ -26,7 +26,8 @@ export const removeAccent = (stringInput: string) => {
 }
 
 export const cleanSlug = (stringInput: string) => {
-  return stringInput.charAt(0).toUpperCase() + stringInput.slice(1).toLowerCase().replaceAll('-', ' ')
+  const replacer = new RegExp('-', 'g');
+  return stringInput.charAt(0).toUpperCase() + stringInput.toLowerCase().replace(replacer, " ")
 }
 
 export const groupBy = (data: any, filter: any) => {

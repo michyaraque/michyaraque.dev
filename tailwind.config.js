@@ -20,10 +20,15 @@ module.exports = {
         '3': '3',
       },
       colors: {
-        languages: {
+        technologies: {
           lua: '#00007c',
           c: '#a3b3c6',
-          javascript: '#efd81d'
+          javascript: '#efd81d',
+          php: '#4f5b93',
+          typescript: '#3078c6',
+          stripe: '#635bff',
+          nextjs: '',
+          reactjs: '#61dafb'
         },
         ...colors
       },
