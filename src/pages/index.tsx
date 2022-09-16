@@ -17,7 +17,7 @@ const Index = ({ posts, snippets }: Record<string, any >) => {
         <Metadata
           title=" "
           titleTemplate='Michael Araque - Arquitecto de ideas y futuro difusor de conocimiento'
-          description="Crear, innovar y compartir ideas"
+          description="Desarrollador Blockend Full Stack, and blockchain enthusiast."
         />
       }
     >
