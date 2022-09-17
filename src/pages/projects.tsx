@@ -45,22 +45,37 @@ const sideProjects = [
     technologies: ["php"]
   }
 ];
+type TProjectCard<T> = {
+  image: string
+  title: string
+  description: string
+  link: string
+  technologies: Array<T>
+}
 
-const ProjectStats = ({ technologies }: any) => {
+const ProjectStats = <T,>({ technologies }: Pick<TProjectCard<T>, 'technologies'>) => {
   return (
     <div className="flex flex-row gap-2 m-auto content-end">
       <span className="my-auto text-center text-base">Tecnologías usadas: </span>
       <div className="flex flex-row justify-end gap-2">
 
-        {technologies.map((language: string, index: number) => (
-          <LanguageLogo key={index} language={language} className="!w-7 !h-7" />
+        {technologies.map((language: T, index: number) => (
+          <LanguageLogo key={index} language={language as unknown as string} className="!w-7 !h-7" />
         ))}
       </div>
     </div>
   )
 }
 
-const ProjectCard = ({ image, title, description, technologies, link}: any) => {
+
+
+const ProjectCard = <T,>({
+  image,
+  title,
+  description,
+  technologies,
+  link
+}: TProjectCard<T>) => {
   return (
     <>
       <article className="w-100 min-h-96h h-auto pb-7 bg-gray-100 rounded-lg">
@@ -84,9 +99,9 @@ const ProjectCard = ({ image, title, description, technologies, link}: any) => {
           </div>
           <span className="font-light text-md">{description}</span>
         </div>
-          <div className="mt-6 mx-4">
-            <ProjectStats technologies={technologies} />
-          </div>
+        <div className="mt-6 mx-4">
+          <ProjectStats technologies={technologies} />
+        </div>
       </article>
     </>
   )

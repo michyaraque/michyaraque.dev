@@ -1,12 +1,17 @@
 import { useState, useRef } from 'react'
 
-const Pre = (props: any) => {
-  const textInput = useRef<any>(null)
+const Pre = (props: MDXPre) => {
+
+  const textInput = useRef<HTMLDivElement>(null)
   const [copied, setCopied] = useState(false)
 
   const onCopy = () => {
     setCopied(true)
-    navigator.clipboard.writeText(textInput.current.textContent)
+
+    if(textInput.current && textInput.current.textContent) {
+      navigator.clipboard.writeText(textInput.current.textContent)
+    }
+
     setTimeout(() => {
       setCopied(false)
     }, 2000)

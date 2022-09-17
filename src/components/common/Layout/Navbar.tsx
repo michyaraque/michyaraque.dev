@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <nav className="flex flex-wrap justify-between text-xl gap-4">
 
-      {isMd ? <DesktopNavbar /> : <MobileNavbar />}
+      <DesktopNavbar />
       <LoginOptionsModal />
     </nav>
   )

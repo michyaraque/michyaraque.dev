@@ -30,8 +30,8 @@ export const cleanSlug = (stringInput: string) => {
   return stringInput.charAt(0).toUpperCase() + stringInput.toLowerCase().replace(replacer, " ")
 }
 
-export const groupBy = (data: any, filter: any) => {
-  let objectGrouped: any = []
+export const groupBy = <T, >(data: Array<T>, filter: string) => {
+  let objectGrouped: Array<unknown | any> = []
   data.forEach((item: any) => {
     if (!objectGrouped.hasOwnProperty(item[filter])) {
       objectGrouped[item[filter]] = []

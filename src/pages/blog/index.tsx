@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 import { getAllFilesMetadata } from '../../../lib/mdx';
 import ShowViews from 'components/ShowViews';
-import { AiFillEye, AiOutlineEye } from 'react-icons/ai';
 
 const Blog = ({ posts }: any) => {
   const [searchValue, setSearchValue] = useState<string>('');
@@ -42,7 +41,7 @@ const Blog = ({ posts }: any) => {
 
       <div className="mt-4 grid">
         <h3 className="mb-4">Todos los posts</h3>
-        {filteredBlogPosts.map(({ title, slug, summary }: any, index: number) => (
+        {filteredBlogPosts.map(({ title, slug, summary }: {[key: string]: string}, index: number) => (
           <div key={index} className="hover:bg-slate-100 hover:rounded-md p-4">
             <Link href={`/blog/${slug}`}>
               <a className="relative">

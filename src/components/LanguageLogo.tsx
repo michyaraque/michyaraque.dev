@@ -9,14 +9,6 @@ import { GoLinkExternal } from "react-icons/go";
 import { FaCcStripe } from "react-icons/fa";
 import tailwind from './../../tailwind.config'
 
-type ILanguageLogo = {
-  language: string;
-  badge?: boolean;
-  className?: string;
-  version?: string;
-  useLink?: boolean;
-};
-
 type ILanguageItems = {
   [key: string]: {
     icon: IconType | string;

@@ -9,7 +9,12 @@ import MeCard from 'components/MeCard';
 
 import { getAllFilesMetadata } from '../../lib/mdx';
 
-const Index = ({ posts, snippets }: Record<string, any >) => {
+type InitialProps = {
+  posts: Record<string, any>
+  snippets: Record<string, any>
+}
+
+function Index({ posts, snippets }: InitialProps) {
 
   return (
     <Wrapper
@@ -60,7 +65,7 @@ const Index = ({ posts, snippets }: Record<string, any >) => {
           Normalmente aquí verás las publicaciones destacadas o las que me apetezca destacar 😎.
         </p>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {posts.slice(0, 3).map(({ title, slug }: any, index: number) => (
+          {posts.slice(0, 3).map(({ title, slug }: {title: string, slug: string}, index: number) => (
             <PostCard key={index} title={title} slug={slug} />
           ))}
         </div>
@@ -82,7 +87,7 @@ const Index = ({ posts, snippets }: Record<string, any >) => {
           Los snippets suelen ser trozos de código funcional que ayudan a mejorar mi experiencia en el desarrollo y por eso me apetecería destacar algunos y esperar que te sirvan tanto como a mi
         </p>
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {snippets.slice(0, 3).map(({ title, slug, icon }: any, index: number) => (
+          {snippets.slice(0, 3).map(({ title, slug, icon }: {[key:string]: string}, index: number) => (
             <SnippetCard key={index} title={title} slug={slug} icon={icon} />
           ))}
         </div>
@@ -104,8 +109,8 @@ export default Index;
 
 export async function getStaticProps() {
 
-  const posts = await getAllFilesMetadata("blog");
-  const snippets = await getAllFilesMetadata("snippets").sort((a: any, b: any): any => {
+  const posts = getAllFilesMetadata("blog");
+  const snippets = getAllFilesMetadata("snippets").sort((a: any, b: any): any => {
     Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
   });
 

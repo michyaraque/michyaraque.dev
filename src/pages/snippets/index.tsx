@@ -24,7 +24,7 @@ const Snippets = ({ snippets }: any) => {
       </section>
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {snippets.map(({ title, slug, icon }: any, index: number) => (
+        {snippets.map(({ title, slug, icon }: {[key: string]: string}, index: number) => (
           <SnippetCard key={index} title={title} slug={slug} icon={icon} />
         ))}
       </div>
@@ -37,7 +37,7 @@ export default Snippets;
 
 export async function getStaticProps() {
 
-  const snippets = await getAllFilesMetadata("snippets");
+  const snippets = getAllFilesMetadata("snippets");
 
   return {
     props: { snippets }

@@ -2,12 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
 
-type ITooltip = {
-  message: string,
-  children: React.ReactNode
-}
-
-const Tooltip = ({ message, children, ...props }: ITooltip) => {
+const Tooltip = ({ message, children, ...props }: MDXTooltip) => {
   return (
     <span className="tooltip nowrap " data-tip={message}>
 

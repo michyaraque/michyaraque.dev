@@ -2,20 +2,12 @@ import Link from 'next/link';
 import React from 'react';
 import { removeAccent } from 'utils';
 
-type IHeading = {
-  id: string,
-  useAnchor?: boolean,
-  size: string,
-  headingType: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "h7",
-  children: React.ReactNode
-}
-
 /**
  * A React component that renders a heading.
- * @param {IHeading} props - IHeading - This is the interface that we created earlier.
+ * @param {MDXHeading} props - MDXHeading - This is the interface that we created earlier.
  * @returns A React component
  */
-const HeadingMaster = (props: IHeading) => {
+const HeadingMaster = (props: MDXHeading) => {
   const { id, useAnchor = true, headingType, size, ...rest } = props;
 
   if (id && useAnchor) {
@@ -44,18 +36,18 @@ const HeadingMaster = (props: IHeading) => {
   </>;
 }
 
-export const H1 = ({ id, children }: IHeading) => {
+export const H1 = ({ id, children }: MDXHeading) => {
   return <HeadingMaster id={id} headingType="h1" size="text-4xl" >{children}</HeadingMaster>
 };
 
-export const H2 = ({ id, children }: IHeading) => {
+export const H2 = ({ id, children }: MDXHeading) => {
   return <HeadingMaster id={id} headingType="h2" size="text-2xl" >{children}</HeadingMaster>
 };
 
-export const H3 = ({ id, children }: IHeading) => {
+export const H3 = ({ id, children }: MDXHeading) => {
   return <HeadingMaster id={id} headingType="h3" size="text-xl" >{children}</HeadingMaster>
 };
 
-export const H4 = ({ id, children }: IHeading) => {
+export const H4 = ({ id, children }: MDXHeading) => {
   return <HeadingMaster id={id} headingType="h4" size="text-lg" >{children}</HeadingMaster>
 };

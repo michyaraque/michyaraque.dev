@@ -1,7 +1,13 @@
+import { ReactNode } from "react";
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa";
 
-const ExternalLink = ({ href, children }: any) => (
+type TExternalLink = {
+  href: string
+  children: ReactNode
+}
+
+const ExternalLink = ({ href, children }: TExternalLink) => (
   <Link href={href}>
     <a
       className="text-gray-500 hover:text-gray-600 transition"
