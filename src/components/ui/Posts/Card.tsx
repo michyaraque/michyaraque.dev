@@ -18,7 +18,7 @@ const Card = ({ title, slug }: { title: string, slug: string }) => {
   return (
     <Link href={`/blog/${slug}`}>
       <a>
-        <div onMouseEnter={onEnter} onMouseLeave={onExit} className={`block border-t-8 border-t-[${slugToHex(slug)}] p-4 min-h-[150px] w-full bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}>
+        <div onMouseEnter={onEnter} onMouseLeave={onExit} className={`block border-t-8 border-t-[${slugToHex(slug)}] p-4 min-h-[150px] w-full bg-white rounded-lg border border-brand-primary-100 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}>
 
           <p className="font-normal text-gray-700 dark:text-gray-400">
             {title}

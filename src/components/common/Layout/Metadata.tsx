@@ -18,6 +18,19 @@ const Metadata = (props: IMetadataProps) => {
 
   const { title, description, canonical, image, ...metadataRest } = props;
 
+  const handleOGImage = (): string => {
+
+    if (title) {
+      return `${process.env.NEXT_PUBLIC_OPENGRAHP_DOMAIN}${cleanText(title)}.png`;
+    }
+
+    if(image) {
+      return image;
+    }
+
+    return '';
+  }
+
   return (
     <>
       <Head>
@@ -60,7 +73,7 @@ const Metadata = (props: IMetadataProps) => {
         openGraph={{
           images: [
             {
-              url: `${image as string ?? process.env.NEXT_PUBLIC_OPENGRAHP_DOMAIN}${cleanText(title as string)}.png`,
+              url: handleOGImage(),
               alt: title,
             },
           ],

@@ -45,8 +45,7 @@ const Courses = ({ courses }: { courses: string[] }) => {
 
               <Link href={`/courses/${path_name}`}>
                 <a>
-                  <div className={`block border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border border-gray-800 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}
-                    style={{ borderColor: slugToHex(path_name) }}>
+                  <div className={`block border-brand-primary-100 border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 relative`}>
 
                     <p className="font-normal text-gray-700 dark:text-gray-400">
                       {beauty_path_name}

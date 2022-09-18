@@ -8,6 +8,7 @@ import { SnippetCard } from 'components/ui/Snippets';
 import MeCard from 'components/MeCard';
 
 import { getAllFilesMetadata } from '../../lib/mdx';
+import LanguageLogo from 'components/LanguageLogo';
 
 type InitialProps = {
   posts: Record<string, any>
@@ -30,12 +31,9 @@ function Index({ posts, snippets }: InitialProps) {
         <div className="w-full">
           <div className="w-full md:w-5/6 h-full flex flex-col gap-2 text-lg">
             <div className="w-full text-5xl lg:text-7xl whitespace-nowrap font-bold
-            bg-gradient-to-r bg-clip-text  text-transparent
-            from-indigo-500 via-purple-500 to-indigo-500
-            animate-text
-            transition-all duration-200 ease-in-out
+
             ">
-              ¡Buenas friend!
+              ¡Hey! 👋
             </div>
 
             <p className="mb-4 mt-10">
@@ -43,7 +41,7 @@ function Index({ posts, snippets }: InitialProps) {
             </p>
 
             <div className="flex flex-col gap-3 leading-[24px] text-gray-600">
-              <p>Empecé a programar en el año 2009 con <SiLua className="inline-block text-languages-lua" /> (Lua) ya que en aquel entonces con 12 años me gustaban mucho los videojuegos y toquetear las entrañas de estos</p>
+              <p>Empecé a programar en el año 2009 con <LanguageLogo language="lua"/> (Lua) ya que en aquel entonces con 12 años me gustaban mucho los videojuegos y toquetear las entrañas de estos</p>
               <p>Todo mi aprendizaje ha sido de manera totalmente autodidacta y me he dedicado a estudiar y aprender nuevas tecnologías y herramientas con el paso del tiempo</p>
               <p>Por eso he decidido craftear este blog para aprender y mejorar mis habilidades frontend, espero el contenido y el blog te gusten 🦾</p>
             </div>

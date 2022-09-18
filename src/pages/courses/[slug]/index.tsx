@@ -5,10 +5,9 @@ import {
   getAllFilesMetadata,
   getCourseMetadata,
   getCoursesPath,
-  getFiles,
 } from "@lib/mdx";
 import { Metadata, Wrapper } from "components/common/Layout";
-import { cleanSlug, groupBy, readingTimeToSpanish } from "utils";
+import { groupBy } from "utils";
 import { BsQuestion } from "react-icons/bs";
 import { AiOutlineRead } from "react-icons/ai";
 import MDXComponents from "components/MDXComponents";
@@ -21,6 +20,12 @@ type IClassBox = {
   title: string;
   readingTime: string;
   classSlug: string;
+};
+
+type IClassCard = {
+  data: Record<string, any>;
+  moduleNumber: number;
+  slug: string;
 };
 
 const ClassBox = (props: IClassBox) => {
@@ -50,12 +55,6 @@ const ClassBox = (props: IClassBox) => {
   );
 };
 
-type IClassCard = {
-  data: Record<string, any>;
-  moduleNumber: number;
-  slug: string;
-};
-
 const ClassCard = (props: IClassCard) => {
   const { data, moduleNumber, slug } = props;
   return (
@@ -81,7 +80,13 @@ const ClassCard = (props: IClassCard) => {
     </section>
   );
 };
-export default function CourseModules({ courseModules, courseDescription, courseName, slug }: any) {
+
+export default function CourseModules({
+  courseModules,
+  courseDescription,
+  courseName,
+  slug
+}: { courseModules: Array<any>, courseDescription: any, courseName: string, slug: string }) {
   const groupedCoursesByModules = groupBy(courseModules, "modulo");
 
   return (
@@ -102,11 +107,9 @@ export default function CourseModules({ courseModules, courseDescription, course
             return (
               <>
                 <div key={index} className="flex flex-col gap-3 my-auto mt-0">
-                  <div className="flex flex-row gap-2 my-auto">
-                    <div className="text-white w-10 h-10 rounded-md bg-[#ecc94b] text-center">
-                      <span className="font-bold inline-block leading-normal align-middle my-0 mx-auto">
-                        {moduleNumber}
-                      </span>
+                  <div className="flex flex-row flex-grow gap-2 my-auto">
+                    <div className="text-white w-10 h-10 rounded-md bg-brand-primary-100 font-bold">
+                      <span className="text-center w-full h-full flex items-center justify-center">{moduleNumber}</span>
                     </div>
                     <span className="h-auto my-auto font-bold text-slate-800">
                       {groupedCoursesByModules[index][0].moduloName}

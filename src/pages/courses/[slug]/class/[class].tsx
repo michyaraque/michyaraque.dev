@@ -8,7 +8,6 @@ import MDXComponents from 'components/MDXComponents';
 import { cleanSlug, slugToHex } from 'utils';
 
 export default function Post({ slug, source, frontmatter }: any) {
-  const [views, setViews] = useState<string | number>('----');
 
   useEffect(() => {
     (async () => {
@@ -16,8 +15,7 @@ export default function Post({ slug, source, frontmatter }: any) {
         const response = await fetch(`https://michyaraque.dev/easy-backend/views/${frontmatter.slug}`, {
           method: 'POST',
         });
-        const data = await response.json();
-        setViews(data.total);
+        await response.json();
       } catch (error) {
         console.log(error)
       }

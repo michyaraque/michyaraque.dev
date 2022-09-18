@@ -20,6 +20,11 @@ module.exports = {
         '3': '3',
       },
       colors: {
+        brand: {
+          primary: {
+            100: '#F6A02D'
+          }
+        },
         technologies: {
           lua: '#00007c',
           c: '#a3b3c6',

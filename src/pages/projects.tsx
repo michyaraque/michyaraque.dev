@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react'
 import { FaGithub } from 'react-icons/fa';
 import { TbWorld } from 'react-icons/tb';
+import { BsArrowUpRight } from 'react-icons/bs';
 
 const workProjects = [
   {
@@ -14,7 +15,7 @@ const workProjects = [
     technologies: ["solidity", "typescript", "chai", "waffle"]
   },
   {
-    title: "ICO Platform",
+    title: "Vesting Platform",
     description: "Plataforma diseñada para interactuar con smart contracts, el usuario es capaz de invertir de forma totalmente automática y también de recoger su recompensa que se calcula a través de un Smart Contract segundo por segundo",
     image: "ico_platform.jpg",
     link: "https://private1.foxtrotcommand.com",
@@ -56,7 +57,7 @@ type TProjectCard<T> = {
 const ProjectStats = <T,>({ technologies }: Pick<TProjectCard<T>, 'technologies'>) => {
   return (
     <div className="flex flex-row gap-2 m-auto content-end">
-      <span className="my-auto text-center text-base">Tecnologías usadas: </span>
+      <span className="my-auto text-center text-lg">Tecnologías usadas: </span>
       <div className="flex flex-row justify-end gap-2">
 
         {technologies.map((language: T, index: number) => (
@@ -78,18 +79,15 @@ const ProjectCard = <T,>({
 }: TProjectCard<T>) => {
   return (
     <>
-      <article className="w-100 min-h-96h h-auto pb-7 bg-gray-100 rounded-lg">
+      <article className="w-100 h-auto pb-7 bg-gray-100 rounded-lg flex flex-col">
         <div className="p-4 relative">
-
-
-
           <img className="h-40 w-full object-cover object-center rounded-lg" src={`/images/projects/${image}`} alt="CGrabber project" />
         </div>
 
-        <div className="flex flex-col gap-3 mx-4">
-          <div className="flex flex-row gap-4">
+        <div className="flex flex-col gap-4 mx-4 flex-grow">
+          <div className="flex flex-row gap-2 justify-between">
             <span className="font-bold text-slate-700">{title}</span>
-            <span className="w-10 h-10 my-auto hover:opacity-90">
+            <span className="my-auto hover:opacity-90">
               <Link href={link}>
                 <a target="_blank" rel="noreel">
                   {link.includes('github') ? <FaGithub size={26} /> : <TbWorld size={26} />}
@@ -98,9 +96,11 @@ const ProjectCard = <T,>({
             </span>
           </div>
           <span className="font-light text-md">{description}</span>
-        </div>
-        <div className="mt-6 mx-4">
-          <ProjectStats technologies={technologies} />
+
+          <div className="mt-auto">
+            <ProjectStats technologies={technologies} />
+          </div>
+
         </div>
       </article>
     </>

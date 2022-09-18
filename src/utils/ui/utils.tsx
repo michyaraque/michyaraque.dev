@@ -30,7 +30,18 @@ export const cleanSlug = (stringInput: string) => {
   return stringInput.charAt(0).toUpperCase() + stringInput.toLowerCase().replace(replacer, " ")
 }
 
-export const groupBy = <T, >(data: Array<T>, filter: string) => {
+export const cleanText = (stringInput: string) => {
+
+  if(stringInput && stringInput.includes('_configuration')) return;
+
+  return stringInput.normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(new RegExp(' ', 'g'), "_")
+    .replace(/[^\w]/g, '')
+}
+
+export const groupBy = <T,>(data: Array<T>, filter: string) => {
   let objectGrouped: Array<unknown | any> = []
   data.forEach((item: any) => {
     if (!objectGrouped.hasOwnProperty(item[filter])) {
