@@ -3,18 +3,20 @@ import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
 import { AppConfig } from 'constant/AppConfig';
+import { cleanText } from 'utils';
 
 type IMetadataProps = {
   title?: string;
   description: string;
   canonical?: string;
   titleTemplate?: string;
+  image?: string
 };
 
 const Metadata = (props: IMetadataProps) => {
   const router = useRouter();
 
-  const { title, description, canonical, ...metadataRest } = props;
+  const { title, description, canonical, image, ...metadataRest } = props;
 
   return (
     <>
@@ -52,13 +54,19 @@ const Metadata = (props: IMetadataProps) => {
       </Head>
       <NextSeo
         {...metadataRest}
-        title={props.title}
-        description={props.description}
-        canonical={props.canonical}
+        title={title}
+        description={description}
+        canonical={`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`}
         openGraph={{
-          title: props.title,
-          description: props.description,
-          url: props.canonical,
+          images: [
+            {
+              url: `${image as string ?? process.env.NEXT_PUBLIC_OPENGRAHP_DOMAIN}${cleanText(title as string)}.png`,
+              alt: title,
+            },
+          ],
+          title: title,
+          description: description,
+          url: `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`,
           locale: AppConfig.locale,
           site_name: AppConfig.site_name,
         }}
