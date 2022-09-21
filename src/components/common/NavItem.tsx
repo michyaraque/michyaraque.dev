@@ -5,7 +5,7 @@ import { wrap } from 'utils';
 
 const NavItem = ({ href, text }: {href: string, text: string}) => {
   const router = useRouter();
-  const isActive = router.asPath === href;
+  const isActive = router.route ===  href.toLowerCase();
 
   return (
     <Link href={href}>

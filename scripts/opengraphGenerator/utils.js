@@ -43,10 +43,10 @@ const createOGImage = ({ route, title, subtitle = '' }) => {
 
   const root = process.cwd();
 
-  const width = 1200
-  const height = 630
-  const canvas = createCanvas(width, height)
-  const context = canvas.getContext('2d')
+  let width = 1200
+  let height = 630
+  let canvas = createCanvas(width, height)
+  let context = canvas.getContext('2d')
 
   const lingrad = context.createLinearGradient(0, 0, 1230, 3000)
   lingrad.addColorStop(0, '#f1f1f1')

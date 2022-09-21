@@ -29,7 +29,7 @@ const MeCard = () => {
           <div className="flex flex-col gap-3 mt-4">
             <div className="flex">
               <FiBriefcase className="mr-2 text-2xl text-gray-500" />
-              <span className="text-base">Blockchain dev en <span className="text-black font-semibold">FoxtrotComamnd</span></span>
+              <span className="text-base">Blockend dev en <span className="text-black font-semibold">FoxtrotComamnd</span></span>
             </div>
             <div className="flex">
               <MdOutlineGpsFixed className="mr-2 text-[24px] text-gray-500" />

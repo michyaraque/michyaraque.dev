@@ -27,11 +27,11 @@ const Footer = () => {
       <div className="w-full  grid grid-cols-1 gap-4 pb-16 sm:grid-cols-4">
         <div className="flex flex-col space-y-4">
           <Link href="/">
-            <a className="text-gray-500 hover:text-gray-600 transition">Home</a>
+            <a className="text-gray-500 hover:text-gray-600 transition">Inicio</a>
           </Link>
-          <Link href="/about">
+          <Link href="/courses">
             <a className="text-gray-500 hover:text-gray-600 transition">
-              About
+              Cursos
             </a>
           </Link>
           <Link href="/newsletter">

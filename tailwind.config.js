@@ -41,10 +41,11 @@ module.exports = {
         50: '50%',
         80: '80%'
       },
-      'animation': {
+      animation: {
         'text': 'text 5s ease infinite',
+        'wave': 'wave 1.5s infinite'
       },
-      'keyframes': {
+      keyframes: {
         'text': {
           '0%, 100%': {
             'background-size': '200% 200%',
@@ -55,7 +56,17 @@ module.exports = {
             'background-position': 'right center'
           }
         },
-      }
+        wave: {
+          '0%': { transform: 'rotate(0.0deg)' },
+          '15%': { transform: 'rotate(14.0deg)' },
+          '30%': { transform: 'rotate(-8.0deg)' },
+          '40%': { transform: 'rotate(14.0deg)' },
+          '50%': { transform: 'rotate(-4.0deg)' },
+          '60%': { transform: 'rotate(10.0deg)' },
+          '70%': { transform: 'rotate(0.0deg)' },
+          '100%': { transform: 'rotate(0.0deg)' },
+        }
+      },
     },
   },
   plugins: [require("daisyui")],
