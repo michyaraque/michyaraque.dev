@@ -5,6 +5,7 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       screens: {
@@ -32,6 +33,7 @@ module.exports = {
           php: '#4f5b93',
           typescript: '#3078c6',
           stripe: '#635bff',
+          metamask: '#f5943e',
           nextjs: '',
           reactjs: '#61dafb'
         },

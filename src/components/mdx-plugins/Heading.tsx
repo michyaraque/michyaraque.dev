@@ -18,7 +18,7 @@ const HeadingMaster = (props: MDXHeading) => {
           {React.createElement(
             headingType,
             {
-              className: `${size} font-bold text-slate-700 my-4`,
+              className: `${size} font-bold text-zinc-700 dark:text-zinc-200 my-4`,
               id: validId
             },
             React.createElement(

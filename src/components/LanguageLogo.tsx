@@ -33,6 +33,12 @@ const brands: ILanguageItems = {
     tooltip: "Hardhat Labs",
     link: "https://hardhat.org",
   },
+  metamask: {
+    icon: "/tech/technologies/metamask.svg",
+    color: "technology-metamask",
+    tooltip: "Metamask",
+    link: "https://metamask.io/",
+  },
 }
 
 const LanguageItems: ILanguageItems = {

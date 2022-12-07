@@ -38,7 +38,7 @@ export default function Post({ slug, source, frontmatter }: any) {
         backgroundColor: slugToHex(frontmatter.slug),
       }}>
         <h1 className="text-2xl md:text-5xl text-white font-bold text-center">{frontmatter.title}</h1>
-        <h2 className="text-center text-slate-200">{frontmatter.classSummary}</h2>
+        <h2 className="text-center text-slate-200 mt-3">{frontmatter.classSummary}</h2>
       </div>
       <MDXRemote {...source} components={MDXComponents} />
     </Wrapper>

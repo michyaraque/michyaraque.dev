@@ -11,9 +11,9 @@ type IMainProps = {
 };
 
 const Wrapper = ({prose = true, ...props}: IMainProps) => (
-  <div className="w-full px-1 text-gray-700 antialiased">
+  <div className="w-full px-1 text-gray-600 dark:text-gray-300 antialiased">
     {props.meta}
-    <div className="mx-auto max-w-5xl flex flex-col justify-center px-4 md:px-8 dark:bg-gray-900">
+    <div className="mx-auto max-w-5xl flex flex-col justify-center px-4 md:px-8">
       <div className="pt-8 pb-4" />
       <Navbar />
       <div className={`content text-xl ${prose && "prose"} dark:prose-dark`}>

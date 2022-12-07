@@ -4,7 +4,6 @@ import Link from 'next/link';
 import React from 'react'
 import { FaGithub } from 'react-icons/fa';
 import { TbWorld } from 'react-icons/tb';
-import { BsArrowUpRight } from 'react-icons/bs';
 
 const workProjects = [
   {
@@ -79,14 +78,14 @@ const ProjectCard = <T,>({
 }: TProjectCard<T>) => {
   return (
     <>
-      <article className="w-100 h-auto pb-7 bg-gray-100 rounded-lg flex flex-col">
+      <article className="w-100 h-auto pb-7 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex flex-col">
         <div className="p-4 relative">
           <img className="h-40 w-full object-cover object-center rounded-lg" src={`/images/projects/${image}`} alt="CGrabber project" />
         </div>
 
         <div className="flex flex-col gap-4 mx-4 flex-grow">
           <div className="flex flex-row gap-2 justify-between">
-            <span className="font-bold text-slate-700">{title}</span>
+            <span className="font-bold text-zinc-700 dark:text-zinc-300">{title}</span>
             <span className="my-auto hover:opacity-90">
               <Link href={link}>
                 <a target="_blank" rel="noreel">
@@ -119,7 +118,7 @@ const projects = () => {
     >
       <div className="flex flex-col gap-6">
         <div>
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-4xl font-bold dark:text-zinc-300 text-zinc-700">
             Trabajos
           </h1>
 
@@ -138,7 +137,7 @@ const projects = () => {
         </div>
 
         <div className="mt-10">
-          <h1 className="text-4xl font-bold">
+          <h1 className="text-4xl font-bold dark:text-zinc-300 text-zinc-700">
             Proyectos/Hobbie
           </h1>
 

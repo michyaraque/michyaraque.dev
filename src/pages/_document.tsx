@@ -20,7 +20,7 @@ class AppDocument extends Document {
             <meta name="theme-color" content="#FFFFFF" />
             <link rel="manifest" href="/manifest.json" />
           </Head>
-          <body className="bg-white dark:bg-black text-white dark:text-black">
+          <body>
             <Main />
             <NextScript />
           </body>

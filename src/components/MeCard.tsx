@@ -6,8 +6,8 @@ import { MdOutlineMail, MdOutlineGpsFixed } from 'react-icons/md'
 const MeCard = () => {
   return (
     <>
-      <div className="flex flex-col min-w-[325px] h-full bg-white rounded-md shadow-lg relative">
-        <span className="absolute -left-28 top-40 font-thin w-full h-full text-[400px]">
+      <div className="flex flex-col min-w-[325px] h-full bg-white dark:bg-zinc-800 rounded-md shadow-lg relative">
+        <span className="absolute -left-28 top-40 font-thin w-full h-full text-[400px] dark:text-zinc-800 text-zinc-700">
           {'{'}
         </span>
 
@@ -18,7 +18,7 @@ const MeCard = () => {
         <div className="mx-4 flex flex-col h-full mb-6">
 
 
-          <h1 className="mt-1 text-xl text-zinc-800 font-regular font-semibold">
+          <h1 className="mt-1 text-xl text-zinc-800 dark:text-zinc-300 font-regular font-semibold">
             Michael Araque <span className="text-base mt-2 opacity-30">aka michyaraque</span>
           </h1>
 
@@ -29,7 +29,7 @@ const MeCard = () => {
           <div className="flex flex-col gap-3 mt-4">
             <div className="flex">
               <FiBriefcase className="mr-2 text-2xl text-gray-500" />
-              <span className="text-base">Blockend dev en <span className="text-black font-semibold">FoxtrotComamnd</span></span>
+              <span className="text-base">Blockend dev en <span className="text-zinc-800 font-semibold dark:text-zinc-300">FoxtrotComamnd</span></span>
             </div>
             <div className="flex">
               <MdOutlineGpsFixed className="mr-2 text-[24px] text-gray-500" />

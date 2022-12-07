@@ -12,9 +12,9 @@ const NavItem = ({ href, text }: {href: string, text: string}) => {
       <a
         className={wrap(
           isActive
-            ? 'font-semibold text-gray-800 dark:text-gray-200'
-            : 'font-normal text-gray-600 dark:text-gray-400',
-          'hidden capitalize md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-brand-primary-100 hover:text-white dark:hover:bg-gray-800 transition-all'
+            ? 'font-semibold text-zinc-800 dark:text-zinc-200'
+            : 'font-normal text-zinc-600 dark:text-zinc-300',
+          'hidden capitalize md:inline-block p-1 sm:px-3 sm:py-2 rounded-lg hover:bg-brand-primary-100 hover:text-white dark:hover:bg-zinc-800 transition-all'
         )}
       >
         {text}

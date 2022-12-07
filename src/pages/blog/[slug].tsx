@@ -28,12 +28,18 @@ export default function Post({ source, frontmatter }: any) {
     <Wrapper
       meta={<Metadata title={frontmatter.title} description="Blog de software y curiosidades." />}
     >
-      <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 " style={{
+      <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 relative" style={{
         backgroundColor: slugToHex(frontmatter.slug),
+        backgroundImage: `${frontmatter.cover ? `url(/images/${frontmatter.slug}/${frontmatter.cover})` : ''}`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}>
-        <h1 className="text-2xl md:text-5xl text-white font-bold">{frontmatter.title}</h1>
+        <div className="bg-black bg-opacity-50 absolute top-0 right-0 left-0 bottom-0 z-0 rounded-lg"/>
 
-        <div className="text-white flex justify-between mt-4">
+        <h1 className="text-2xl md:text-5xl text-white font-bold z-1 relative">{frontmatter.title}</h1>
+
+        <div className="text-white flex justify-between mt-4 z-1 relative">
 
           <div className="flex items-center">
             <img src="/me.jpg" alt="Michael Araque's face" className="w-[36px] rounded-full border-2 p-0.5" />

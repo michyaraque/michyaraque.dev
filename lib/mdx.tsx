@@ -4,8 +4,6 @@ import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeSlug from "rehype-slug";
 import rehypePrism from "rehype-prism-plus";
-import rehypeCodeTitles from "rehype-code-titles";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import remarkCodeTitles from "./remark-code-title";
 import readingTime from "reading-time";
 import { cleanSlug } from "utils";

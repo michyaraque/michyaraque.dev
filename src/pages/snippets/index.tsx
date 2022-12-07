@@ -15,7 +15,7 @@ const Snippets = ({ snippets }: any) => {
       }
     >
       <section aria-label="Header Section">
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold dark:text-gray-300 text-gray-700">
           Snippets
         </h1>
         <p className="mt-2">
