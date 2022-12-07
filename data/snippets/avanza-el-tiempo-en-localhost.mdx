@@ -5,6 +5,8 @@ summary: 'Avanza el tiempo'
 icon: 'solidity'
 ---
 
+Avanza el tiempo en la blockchain en la que se está ejecutando el código (localhost). Se utiliza para probar diferentes escenarios en un smart contract sin tener que esperar el tiempo real.
+
 ```js
 const AdvanceTime = async (time: number) => {
   await ethers.provider.send('evm_increaseTime', [time]);

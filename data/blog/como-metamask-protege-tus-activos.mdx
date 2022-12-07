@@ -1,0 +1,36 @@
+---
+title: '¿Cómo Metamask protege tus activos?'
+publishedAt: '2022-12-07'
+summary: 'Entiende como se protegen tus activos con Metamask'
+cover: metamask_safe_actives.png
+---
+
+Si eres un usuario asiduo de las criptomonedas y NFTs seguro que conoces <LanguageLogo language="metamask" useLink={false} className="w-5 h-5"/> Metamask. Hoy te voy a explicar por qué es importante que te preocupes por la seguridad de tus activos. Afortunadamente, existe Metamask y un sinfín de ```wallets descentralizadas```, pero Metamask es bastante popular ya que al ser una extensión de navegador es mucho más accesible para todos.
+
+Ahora bien... ¿cómo asegura Metamask la seguridad de tus activos?
+
+En primer lugar, es importante señalar que Metamask almacena la frase semilla en tu propio ordenador en lugar de en un servidor centralizado. Esto significa que tú eres el único que tiene acceso a tus fondos y que no corres el riesgo de que un atacante o una empresa comprometa tus criptomonedas.
+
+### ¿Cómo Metamask encripta tu frase semilla para que esté segura?
+
+Para proteger tus activos Metamask usa ```Base64``` para enmascarar los datos y una vez enmascarados utiliza tu contraseña, además de la contraseña, Metamask también utiliza una técnica llamada cifrado de clave privada ```(AES GCM)``` para proteger todos los datos relacionados con tus wallets o frase semilla.
+
+Ten en cuenta que cada una de tus billeteras poseen una clave privada que es una cadena de caracteres aleatorios que se utiliza para firmar las transacciones que envías desde tu cuenta. Esta clave privada está cifrada también con la contraseña que ingresaste cuando configuraste tu cuenta, lo que significa que nadie más puede acceder a ella.
+
+Esto es un ejemplo de la estructura de datos generada y que es almacenada en tu ordenador:
+
+```json
+{
+  "data":"wM+CSmCIIlaofXHPxCRFqbcPvEDZESBYM1XdAE8VFanedEt15npqzkW0MCQDBA5T1W1/Ltg7lKBszkoJJ1PtVHOpTn...",
+  "iv":"ejhZW94EsJZ049Sb/at0Xg==",
+  "salt":"jgW3gi0eyPtXXguqMzi6uGyuR6m+lgQXw8onqivK5w0="
+}
+```
+
+Estos datos por muy raros que parezcan almacenan varios datos relacionados con tus wallets, frase semilla, y llave privada en un formato encriptado. La única forma de conseguir acceso a toda esta información es con la contraseña que previamente configuraste para iniciar sesión.
+
+### Resumen
+
+Podríamos resumirlo todo a que Metamask utiliza técnicas de cifrado avanzadas para proteger tus activos y asegurarte de que sólo tú puedas acceder a ellos. Sin embargo, es importante recordar que la seguridad de tus criptomonedas también depende de ti. Asegúrate de utilizar contraseñas fuertes y no compartir tus claves privadas con nadie. Además, es recomendable utilizar Metamask junto con otras medidas de seguridad, como una billetera fría, para maximizar la protección de tus activos.
+
+Cuidaros y cuidar vuestros activos con cabeza, o con encriptación 😁🦾

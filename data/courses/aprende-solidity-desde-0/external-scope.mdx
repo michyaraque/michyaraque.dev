@@ -1,10 +1,29 @@
 ---
-title: 'External Sccope'
+title: 'External Scope'
 publishedAt: '2022-09-10'
-summary: 'Te enseño los principios básico de solidity para que avances en tu carrera profesional'
+summary: 'Descubre cómo puedes exponer funciones de un contrato a otros contratos y a entornos externos.'
 modulo: 2
 moduloName: 'Scopes'
 classSummary: 'Scope: External'
 ---
 
-El tipo primitivo ```address``` es característico ya que se usa única y exclusivamente para almacenar direcciones con un patrón binario concreto ```20 bytes [ENS]```
+El ```scope external``` es una palabra reservada en Solidity que se utiliza para declarar una función como **externa**. Esto significa que la función puede ser accedida y llamada desde otros contratos o desde fuera de la blockchain.
+
+La utilización de ```external``` es útil cuando se desea permitir el acceso a ciertas funciones de un contrato desde otros contratos o desde fuera de la blockchain. Por ejemplo, si se desea crear un contrato que actúe como una interfaz para otro contrato, se pueden declarar las funciones que se desean exponer como externas.
+
+Ejemplo:
+
+```solidity:Solidity
+contract MiContrato {
+   // Declaración de una variable interna
+   uint256 private variableInterna;
+
+   // Declaración de una función externa
+   function miFuncionExterna(uint256 valor) external {
+     // Código de la función
+     variableInterna = valor;
+   }
+}
+```
+
+En este ejemplo, se ha declarado la función ```miFuncionExterna``` como externa, lo que significa que puede ser accedida y llamada desde otros contratos o desde fuera de la cadena de bloques. La función tiene acceso a la variable interna ```variableInterna``` y puede modificar su valor mediante la asignación de un valor dado como argumento.

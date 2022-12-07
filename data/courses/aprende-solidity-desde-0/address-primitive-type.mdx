@@ -1,5 +1,5 @@
 ---
-title: 'Tipos address'
+title: 'Tipos primitivos'
 publishedAt: '2022-09-10'
 summary: 'Te enseño los principios básico de solidity para que avances en tu carrera profesional'
 modulo: 1
@@ -7,4 +7,29 @@ moduloName: Tipos Primitivos
 classSummary: 'Tipos Primitivos: Address'
 ---
 
-El tipo primitivo ```address``` es característico ya que se usa única y exclusivamente para almacenar direcciones con un patrón binario concreto ```20 bytes [ENS]```
+```Address``` es un tipo de dato que se utiliza para almacenar direcciones de contratos o cuentas de la blockchain. Una dirección de contrato es una dirección única en la blockchain que se utiliza para identificar un smart contract. Una cuenta de la blockchain es una dirección única también que se utiliza para identificar una cuenta de usuario en la blockchain.
+
+El tipo ```address``` tiene un tamaño de <Tooltip message="Ejemplo: 0x0000000000000000000000000000000000000000">20 bytes</Tooltip> y tiene varias propiedades y funciones integradas que permiten interactuar con contratos y cuentas de la blockchain. Por ejemplo, se puede utilizar la propiedad "balance" para obtener el saldo de una cuenta de la blockchain, o la función "transfer" para enviar tokens de una cuenta a otra.
+
+Ejemplo:
+
+```solidity:Solidity
+pragma solidity ^0.8.13;
+
+contract MiContrato {
+   // Declaración de una variable de tipo address
+   address cuentaUsuario;
+
+   // Función que asigna una dirección de cuenta a la variable
+   function asignarCuenta(address cuenta) public {
+      cuentaUsuario = cuenta;
+   }
+
+   // Función que obtiene el saldo de la cuenta asignada
+   function obtenerSaldo() public view returns (uint256) {
+      return cuentaUsuario.balance;
+   }
+}
+```
+
+En este ejemplo, se ha declarado una variable de tipo ```address``` llamada ```cuentaUsuario```. La función ```asignarCuenta``` se utiliza para asignar una dirección de cuenta a esta variable. La función "obtenerSaldo" utiliza la propiedad "balance" del tipo "address" para obtener el saldo de la cuenta asignada en la variable "cuentaUsuario".
