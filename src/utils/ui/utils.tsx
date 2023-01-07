@@ -27,7 +27,7 @@ export const removeAccent = (stringInput: string) => {
 
 export const cleanSlug = (stringInput: string) => {
   const replacer = new RegExp('-', 'g');
-  return stringInput.charAt(0).toUpperCase() + stringInput.toLowerCase().replace(replacer, " ")
+  return stringInput.charAt(0).toUpperCase() + stringInput.toLowerCase().slice(1).replace(replacer, " ")
 }
 
 export const cleanText = (stringInput: string) => {

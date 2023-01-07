@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
 
-const Tooltip = ({ message, children, ...props }: MDXTooltip) => {
+const Tooltip = (props: MDXTooltip) => {
+
+  const { message, children, ...restProps } = props;
   return (
     <span className="tooltip nowrap " data-tip={message}>
 
@@ -10,8 +12,11 @@ const Tooltip = ({ message, children, ...props }: MDXTooltip) => {
         {children}
       </code>
 
-
-      <FaInfoCircle color="#d1d1d1" size="16px" className="hover:cursor-help hover:fill-gray-400 absolute -top-1 -right-2 -z-0" />
+      <FaInfoCircle
+        color="#d1d1d1"
+        size="16px"
+        className="hover:cursor-help hover:fill-gray-400 absolute -top-1 -right-2 -z-0"
+      />
     </span>
   )
 }
