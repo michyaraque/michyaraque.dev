@@ -47,7 +47,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: out
-          remote: ${{ github.head_ref == "master" && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}
+          remote: ${{ github.head_ref == 'master' && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
@@ -55,7 +55,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: .backend/root/.htaccess
-          remote: ${{ github.head_ref == "master" && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}/.htaccess
+          remote: ${{ github.head_ref == 'master' && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}/.htaccess
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
@@ -63,7 +63,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: .backend/easy-backend
-          remote: ${{ github.head_ref == "master" && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}/easy-backend
+          remote: ${{ github.head_ref == 'master' && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}/easy-backend
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
