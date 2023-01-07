@@ -7,9 +7,7 @@ const updateView = async (slug: string, setViews: React.Dispatch<React.SetStateA
     });
 
     if (!response.ok) {
-      throw new Error(response.statusText, {
-        cause: response
-      });
+      throw new Error(response.statusText);
     }
 
     const { total } = await response.json();

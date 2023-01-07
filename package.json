@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:dev": "cp .env.development .env.local && next build && next export",
-    "build:prod": "cp .env.production .env.local && next build && next export",
+    "build:dev": "copyfiles .env.development .env.local && next build && next export",
+    "build:prod": "copyfiles .env.production .env.local && next build && next export",
     "export": "next build && next export",
     "dev": "next dev",
     "build": "next build",
@@ -16,6 +16,7 @@
     "@mdx-js/loader": "^2.1.1",
     "@next/mdx": "^12.1.6",
     "canvas": "^2.10.1",
+    "copyfiles": "^2.4.1",
     "daisyui": "^2.15.4",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
