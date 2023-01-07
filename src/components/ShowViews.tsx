@@ -1,9 +1,20 @@
 import React from 'react'
 import useSWR from 'swr'
 
-const ShowViews = ({ slug, onlyNumber = false, ...props }: { slug: string, onlyNumber?: boolean }) => {
+type IViews = {
+  [key: string]: any;
+}
 
-  async function fetchController<JSON = any>(
+type IProps ={
+  slug: string;
+  onlyNumber?: boolean;
+}
+
+const ShowViews = (props: IProps) => {
+
+  const {slug, onlyNumber, ...restProps} = props;
+
+  async function fetchController<JSON = IViews>(
     input: RequestInfo,
     init?: RequestInit
   ): Promise<JSON> {
@@ -11,11 +22,15 @@ const ShowViews = ({ slug, onlyNumber = false, ...props }: { slug: string, onlyN
     return res.json();
   }
 
-  const { data } = useSWR<any>(`https://michyaraque.dev/easy-backend/views/${slug}`, fetchController)
-  const views = data?.total;
+  let views = 0;
+
+  if (process.env.NODE_ENV !== 'development') {
+    const { data }: IViews = useSWR<IViews>(`${process.env.NEXT_PUBLIC_DOMAIN_API}/views/${slug}`, fetchController)
+    views = data?.total;
+  }
 
   return (
-    <div>{views > 0 || views !== undefined ? views : '---'} {!onlyNumber && 'visitas'}</div>
+    <div>{Number(views) > 0 || views !== undefined ? views : '---'} {!onlyNumber ? 'visitas' : ''}</div>
   )
 }
 
