@@ -2,7 +2,7 @@ name: Build and deploy Michyaraque's Blog to VPS
 
 on:
   push:
-    branches: [ master, solve-github-action ]
+    branches: [ development ]
   pull_request:
     branches: [ master ]
 
@@ -47,7 +47,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: out
-          remote: ${{ secrets.VPS_PATH }}
+          remote: ${{ github.head_ref == "master" && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
@@ -55,7 +55,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: .backend/root/.htaccess
-          remote: ${{ secrets.VPS_PATH }}/.htaccess
+          remote: ${{ github.head_ref == "master" && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}/.htaccess
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
@@ -63,7 +63,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: .backend/easy-backend
-          remote: ${{ secrets.VPS_PATH }}/easy-backend
+          remote: ${{ github.head_ref == "master" && secrets.VPS_PATH || secrets.DEV_VPS_PATH }}/easy-backend
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
