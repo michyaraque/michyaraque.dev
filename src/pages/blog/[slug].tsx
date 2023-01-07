@@ -5,24 +5,11 @@ import { getFileBySlug, getFiles } from '@lib/mdx'
 import { Metadata, Wrapper } from 'components/common/Layout';
 import MDXComponents from 'components/MDXComponents';
 import { readingTimeToSpanish, slugToHex, styledDate } from 'utils';
+import useUpdateViews from 'hooks/useUpdateViews';
 
 export default function Post({ source, frontmatter }: any) {
-  const [views, setViews] = useState<string|number>('----');
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(`https://michyaraque.dev/easy-backend/views/${frontmatter.slug}`, {
-          method: 'POST',
-        });
-        const data = await response.json();
-        setViews(data.total);
-      } catch (error) {
-        console.log(error)
-      }
-    })();
-
-  }, []);
+  const {views} = useUpdateViews(frontmatter.slug)
 
   return (
     <Wrapper

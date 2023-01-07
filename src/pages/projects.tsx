@@ -67,8 +67,6 @@ const ProjectStats = <T,>({ technologies }: Pick<TProjectCard<T>, 'technologies'
   )
 }
 
-
-
 const ProjectCard = <T,>({
   image,
   title,
@@ -78,9 +76,11 @@ const ProjectCard = <T,>({
 }: TProjectCard<T>) => {
   return (
     <>
-      <article className="w-100 h-auto pb-7 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex flex-col">
-        <div className="p-4 relative">
-          <img className="h-40 w-full object-cover object-center rounded-lg" src={`/images/projects/${image}`} alt="CGrabber project" />
+      <article className="w-100 h-auto pb-7 bg-zinc-100 dark:bg-zinc-700 rounded-lg flex flex-col group">
+        <div className="p-4 relative h-48 w-full rounded-lg">
+          <div className='w-full h-full rounded-lg bg-center bg-[size:100%] group-hover:bg-[size:120%] transition-all ease-in-out duration-200' style={{
+            backgroundImage: `url('${`/images/projects/${image}`}')`
+            }}/>
         </div>
 
         <div className="flex flex-col gap-4 mx-4 flex-grow">

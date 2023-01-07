@@ -5,6 +5,13 @@ import Link from 'next/link';
 
 import { getCoursesPath } from '../../../lib/mdx';
 
+export async function getStaticProps() {
+  const courses = getCoursesPath();
+  return {
+    props: { courses }
+  }
+}
+
 const Courses = ({ courses }: { courses: string[] }) => {
   const [searchValue, setSearchValue] = useState<string>('');
 
@@ -35,7 +42,7 @@ const Courses = ({ courses }: { courses: string[] }) => {
 
       <div className="mt-4 grid">
         <h3 className="mb-4 dark:text-zinc-300 text-zinc-700">Todos los cursos</h3>
-        <section className="grid grid-rows md:grid-cols-2">
+        <section className="grid grid-rows md:grid-cols-2 gap-6">
 
           {courses.map(({ path_name, beauty_path_name }: any, index: number) => (
             <div key={index}>
@@ -71,10 +78,3 @@ const Courses = ({ courses }: { courses: string[] }) => {
 };
 
 export default Courses;
-
-export async function getStaticProps() {
-  const courses = getCoursesPath();
-  return {
-    props: { courses }
-  }
-}

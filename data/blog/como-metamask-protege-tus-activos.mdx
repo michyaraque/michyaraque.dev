@@ -5,11 +5,48 @@ summary: 'Entiende como se protegen tus activos con Metamask'
 cover: metamask_safe_actives.png
 ---
 
-Si eres un usuario asiduo de las criptomonedas y NFTs seguro que conoces <LanguageLogo language="metamask" useLink={false} className="w-5 h-5"/> Metamask. Hoy te voy a explicar por qué es importante que te preocupes por la seguridad de tus activos. Afortunadamente, existe Metamask y un sinfín de ```wallets descentralizadas```, pero Metamask es bastante popular ya que al ser una extensión de navegador es mucho más accesible para todos.
+Bueno, bueno, hoy toca hablar de wallets. Este post lo escribo principalmente porque recientemente tuve que hacer una implementación relacionada con el uso de cierta a nivel código de Metamask.
 
-Ahora bien... ¿cómo asegura Metamask la seguridad de tus activos?
+Ahora si...
 
-En primer lugar, es importante señalar que Metamask almacena la frase semilla en tu propio ordenador en lugar de en un servidor centralizado. Esto significa que tú eres el único que tiene acceso a tus fondos y que no corres el riesgo de que un atacante o una empresa comprometa tus criptomonedas.
+Entremos en materia, si eres un usuario asiduo de las criptomonedas y NFTs seguro que conoces al zorrito naranja (<LanguageLogo language="metamask" useLink={false} className="w-5 h-5"/> **Metamask**). Si no conoces Metamask entonces no te va mucho el tema criptomonedas, nft, propiedad digital, etc... Peeero... No pasa nada 🤔
+
+Bueno, no te preocupes, capaz esta información te sirve igual, te voy a explicar por qué es importante que te preocupes en entender como estas wallets descentralizadas se preocupan por la seguridad de tus activos. Afortunadamente, existe Metamask y un sinfín de ```wallets descentralizadas```, vamos a hablar principalmente de Metamask porque es bastante popular ya que al ser una extensión de navegador es mucho más accesible para todos.
+
+Ahora bien vamos a la chicha, a la parte de la que quiero hablar y de la que quiero que te enteres... ¿cómo Metamask se asegura de que nuestros activos estén seguros?
+
+## Fundamentos para entender una wallet
+
+Tranquilo/a la pregunta antes mencionada te la responderé más adelante, antes vamos a despejar unas cuantas dudas para intentar entender los fundamentos de como se compone una wallet.
+
+### ¿Qué es un mnemonic?
+
+En pocas palabras el **mnemonic** es un algoritmo que convierte la llave secreta maestra de tu wallet en un formato humano, el cual podamos recordar pero te digo yo que casi nadie se acuerda de su mnemonic 🤔.
+
+El mnemonic puede estar compuesto por 12, 24, 25 palabras y no se generan incluyendo todas las palabras del diccionario eh, no estamos tan locos. Hay una lista específica para el momento de la generación
+
+Te muestro un ejemplo de mnemonic para que te hagas una idea de a lo que me estoy refiriendo:
+```bash:mnemonic.key
+soup stock feel page hair slender nut cry chalk page follow corn
+```
+❌: No copies ni intentes usar el mnemonic de ejemplo, bueno... Si quieres perder el tiempo hazlo
+
+### ¿Qué es un llavero de wallets?
+
+Un llavero de wallets consiste en valga la redudancia un llavero de wallets. Podríamos decir que cada llave de un llavero haría referencia a un wallet. Por tanto podrías tener tantas llaves como quieras en ese llavero.
+
+Vale... ¿y esto que tiene que ver con Metamask?
+
+Metamask usa un sistema del tipo llavero donde te ayuda a generar infinitas wallets basadas en tu mnemonic, que por cierto es único.
+
+### ¿Qué datos contiene una wallet del tipo llavero?
+
+Una wallet del tipo llavero se componone de los siguientes elementos fundamentales:
+
+- mnemonic: Frase secreta, normalmente de 12 palabras
+- hdPath: Suele ser la ruta en memoria de donde se guarda la información, tiene una estructura parecida a esta **m/44'/60'/0**
+
+Realmente con esta base ya se puede generar un llavero de wallets, puedes ampliar más infor en el [repositorio de metamask](https://github.com/MetaMask/KeyringController)
 
 ### ¿Cómo Metamask encripta tu frase semilla para que esté segura?
 
