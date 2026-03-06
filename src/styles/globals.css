@@ -1,8 +1,34 @@
 @import "tailwindcss";
+@plugin "daisyui";
+
+@custom-variant dark (&:where(.dark, .dark *));
 @layer base {
   body {
     @apply dark:bg-zinc-900 dark:text-zinc-100 bg-zinc-50 text-zinc-900
   }
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@theme {
+  --default-ring-width: 3px;
+  --default-ring-color: var(--color-blue-500);
 }
 
 /* ===== Scrollbar CSS ===== */
@@ -134,7 +160,7 @@ h3 {
 @supports not (backdrop-filter: none) {
   .sticky-nav {
     backdrop-filter: none;
-    @apply bg-opacity-100;
+    @apply bg-zinc-50 dark:bg-zinc-900;
   }
 }
 

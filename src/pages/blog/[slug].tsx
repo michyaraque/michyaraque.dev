@@ -22,7 +22,7 @@ export default function Post({ source, frontmatter }: any) {
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}>
-        <div className="bg-black bg-opacity-50 absolute top-0 right-0 left-0 bottom-0 z-0 rounded-lg"/>
+        <div className="bg-black/50 absolute top-0 right-0 left-0 bottom-0 z-0 rounded-lg"/>
 
         <h1 className="text-2xl md:text-5xl text-white font-bold z-1 relative">{frontmatter.title}</h1>
 

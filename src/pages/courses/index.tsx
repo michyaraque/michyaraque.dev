@@ -33,7 +33,7 @@ const Courses = ({ courses }: { courses: string[] }) => {
           <FaSearch />
         </span>
         <input
-          className="placeholder:italic placeholder:text-zinc-400 block bg-zinc-50 hover:bg-white w-full border border-zinc-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-zinc-500 focus:ring-zinc-500 focus:ring-1 sm:text-sm dark:bg-zinc-300 dark:placeholder:text-zinc-600"
+          className="placeholder:italic placeholder:text-zinc-400 block bg-zinc-50 hover:bg-white w-full border border-zinc-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-hidden focus:border-zinc-500 focus:ring-zinc-500 focus:ring-1 sm:text-sm dark:bg-zinc-300 dark:placeholder:text-zinc-600"
           type="text"
           placeholder="Buscar"
           onChange={(e) => setSearchValue(e.target.value)}

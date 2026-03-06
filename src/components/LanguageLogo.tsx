@@ -7,7 +7,7 @@ import {TbBrandNextjs} from 'react-icons/tb';
 import Link from "next/link";
 import { GoLinkExternal } from "react-icons/go";
 import { FaCcStripe } from "react-icons/fa";
-import tailwind from './../../tailwind.config'
+
 
 type ILanguageItems = {
   [key: string]: {
@@ -146,8 +146,8 @@ const LanguageLogo = ({
           React.createElement(LanguageItems[language].icon as IconType | any, {
             className: `inline-block ${className ? className : ''}`,
             style: {
-              fill: tailwind.theme.extend.colors.technologies[language],
-              color: tailwind.theme.extend.colors.technologies[language]
+              fill: `var(--color-technologies-${language})`,
+              color: `var(--color-technologies-${language})`
             }
           })
         ) : (
