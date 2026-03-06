@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build:dev": "copyfiles .env.development .env.local && next build && next export",
-    "build:prod": "copyfiles .env.production .env.local && next build && next export",
-    "export": "next build && next export",
+    "build:dev": "copyfiles .env.development .env.local && next build",
+    "build:prod": "copyfiles .env.production .env.local && next build",
+    "export": "next build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

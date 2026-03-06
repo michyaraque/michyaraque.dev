@@ -4,7 +4,11 @@ const withMDX = createMDX({
   extension: /\.mdx?$/,
 })
 
+/**
+ * @type {import('next').NextConfig}
+ */
 export default withMDX({
+  output: 'export',
   trailingSlash: true,
   eslint: {
     ignoreDuringBuilds: true,
