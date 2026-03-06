@@ -64,7 +64,6 @@ export default function Post({ source, frontmatter }: any) {
 
         {/* Content */}
         <div className="max-w-none">
-          {/* @ts-expect-error MDXRemote has type issues in React 19/Next 16 */}
           <MDXRemote {...source} components={MDXComponents} />
         </div>
       </article>

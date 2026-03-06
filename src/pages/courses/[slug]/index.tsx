@@ -109,7 +109,6 @@ export default function CourseModules({
                {courseName}<span className="text-brand-primary">.</span>
              </h1>
              <div className="max-w-2xl font-mono text-sm uppercase tracking-tight text-zinc-500">
-                {/* @ts-expect-error Types version mismatch */}
                 <MDXRemote {...courseDescription} components={MDXComponents} />
              </div>
            </div>

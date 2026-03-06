@@ -68,7 +68,6 @@ export default function Post({ slug, source, frontmatter }: any) {
 
         {/* Content Section */}
         <main className="max-w-none">
-          {/* @ts-expect-error Types version mismatch */}
           <MDXRemote {...source} components={MDXComponents} />
         </main>
       </div>
