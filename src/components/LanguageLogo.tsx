@@ -159,16 +159,16 @@ const LanguageLogo = ({
         )}
       </span>
       {useLink && (
-        <Link passHref href={LanguageItems[language].link}>
-          <a target="_blank">
-            <p className="hover:border-b-2 hover:text-gray-500 ml-2 first-letter:uppercase lowecase">
-              {language}
-              {version !== undefined && (
-                <span className="ml-2 text-base">{`[v${version}]`}</span>
-              )}
-              <GoLinkExternal className="base ml-2 inline-block" />
-            </p>
-          </a>
+        <Link href={LanguageItems[language].link} target="_blank">
+
+          <p className="hover:border-b-2 hover:text-gray-500 ml-2 first-letter:uppercase lowecase">
+            {language}
+            {version !== undefined && (
+              <span className="ml-2 text-base">{`[v${version}]`}</span>
+            )}
+            <GoLinkExternal className="base ml-2 inline-block" />
+          </p>
+
         </Link>
       )}
     </span>

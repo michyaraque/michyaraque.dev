@@ -29,11 +29,10 @@ export default function Post({ slug, source, frontmatter }: any) {
     >
       <div className="text-sm breadcrumbs">
         <ul>
-          <li><Link href={`/courses/${slug}`}><a>{cleanSlug(slug)}</a></Link></li>
+          <li><Link href={`/courses/${slug}`}>{cleanSlug(slug)}</Link></li>
           <li className="text-slate-400 cursor-not-allowed">{frontmatter.classSummary}</li>
         </ul>
       </div>
-
       <div className="w-full h-full rounded-lg px-4 md:px-10 py-6 relative" style={{
         backgroundColor: slugToHex(frontmatter.slug),
       }}>
@@ -42,7 +41,7 @@ export default function Post({ slug, source, frontmatter }: any) {
       </div>
       <MDXRemote {...source} components={MDXComponents} />
     </Wrapper>
-  )
+  );
 }
 
 export async function getStaticPaths() {

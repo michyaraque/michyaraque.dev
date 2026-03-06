@@ -70,9 +70,9 @@ const ThemeButtonChanger = () => {
 const DesktopNavbar = ({ theme, setTheme }: any) => (
   <>
     <Link href="/">
-      <a>
-        <span className="font-bold text-3xl">michyaraque</span>
-      </a>
+
+      <span className="font-bold text-3xl">michyaraque</span>
+
     </Link>
 
     <div className="flex gap-4">
@@ -100,11 +100,11 @@ const MobileNavbar = () => {
           </label>
           <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-md w-52">
             <li><NavItem href="/" text="Inicio" /></li>
-            <li><Link href="/"><a>Inicio</a></Link></li>
-            <li><Link href="/blog"><a>blog</a></Link></li>
-            <li><Link href="/courses"><a>Cursos</a></Link></li>
-            <li><Link href="/snippets"><a>Snippets</a></Link></li>
-            <li><Link href="/projects"><a>Mis Proyectos</a></Link></li>
+            <li><Link href="/">Inicio</Link></li>
+            <li><Link href="/blog">blog</Link></li>
+            <li><Link href="/courses">Cursos</Link></li>
+            <li><Link href="/snippets">Snippets</Link></li>
+            <li><Link href="/projects">Mis Proyectos</Link></li>
           </ul>
         </div>
       </div>
@@ -119,7 +119,7 @@ const MobileNavbar = () => {
         </div>
       </div>
     </div >
-  )
+  );
 }
 
 export default Navbar

@@ -8,14 +8,14 @@ type TExternalLink = {
 }
 
 const ExternalLink = ({ href, children }: TExternalLink) => (
-  <Link href={href}>
-    <a
-      className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-300 dark:hover:text-zinc-400 transition"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {children}
-    </a>
+  <Link
+    href={href}
+    className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-300 dark:hover:text-zinc-400 transition"
+    target="_blank"
+    rel="noopener noreferrer">
+
+    {children}
+
   </Link>
 );
 
@@ -23,21 +23,26 @@ const Footer = () => {
   return (
     <footer className="flex flex-col justify-center items-start max-w-5xl mx-auto w-full mb-8 mt-10">
       <hr className="w-full border-1 border-zinc-200 dark:border-zinc-800 mb-8" />
-
       <div className="w-full  grid grid-cols-1 gap-4 pb-16 sm:grid-cols-4">
         <div className="flex flex-col space-y-4">
-          <Link href="/">
-            <a className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">Inicio</a>
+          <Link
+            href="/"
+            className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+            Inicio
           </Link>
-          <Link href="/courses">
-            <a className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+          <Link
+            href="/courses"
+            className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+            
               Cursos
-            </a>
+            
           </Link>
-          <Link href="/newsletter">
-            <a className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+          <Link
+            href="/newsletter"
+            className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+            
               Newsletter
-            </a>
+            
           </Link>
         </div>
         <div className="flex flex-col space-y-4">
@@ -49,10 +54,12 @@ const Footer = () => {
           </ExternalLink>
         </div>
         <div className="flex flex-col space-y-4">
-          <Link href="/snippets">
-            <a className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+          <Link
+            href="/snippets"
+            className="text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400 dark:text-zinc-300 transition">
+            
               Snippets
-            </a>
+            
           </Link>
         </div>
 
@@ -71,7 +78,6 @@ const Footer = () => {
         </div>
 
       </div>
-
     </footer>
   );
 };

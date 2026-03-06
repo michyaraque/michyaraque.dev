@@ -27,7 +27,6 @@ const Courses = ({ courses }: { courses: string[] }) => {
       <h1 className="text-4xl font-bold dark:text-zinc-200 text-zinc-700">
         Cursos
       </h1>
-
       <label className="relative block">
         <span className="absolute inset-y-0 left-0 flex items-center pl-2 dark:text-zinc-700">
           <FaSearch />
@@ -39,7 +38,6 @@ const Courses = ({ courses }: { courses: string[] }) => {
           onChange={(e) => setSearchValue(e.target.value)}
         />
       </label>
-
       <div className="mt-4 grid">
         <h3 className="mb-4 dark:text-zinc-300 text-zinc-700">Todos los cursos</h3>
         <section className="grid grid-rows md:grid-cols-2 gap-6">
@@ -48,31 +46,30 @@ const Courses = ({ courses }: { courses: string[] }) => {
             <div key={index}>
 
               <Link href={`/courses/${path_name}`}>
-                <a>
-                  <div className={`block border-brand-primary-100 border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border shadow-md hover:bg-zinc-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700 relative`}>
 
-                    <p className="font-normal text-zinc-700 dark:text-zinc-400">
-                      {beauty_path_name}
-                    </p>
-                    <div className="flex items-center text-base bottom-2 left-4 absolute">
-                      <span>Dificultad: </span>
-                      <div className="rating">
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" defaultChecked={true}/>
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400"  />
-                        <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
-                      </div>
+                <div className={`block border-brand-primary-100 border-t-8 p-4 min-h-[150px] w-full bg-white rounded-lg border shadow-md hover:bg-zinc-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700 relative`}>
+
+                  <p className="font-normal text-zinc-700 dark:text-zinc-400">
+                    {beauty_path_name}
+                  </p>
+                  <div className="flex items-center text-base bottom-2 left-4 absolute">
+                    <span>Dificultad: </span>
+                    <div className="rating">
+                      <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+                      <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
+                      <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" defaultChecked={true}/>
+                      <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400"  />
+                      <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                     </div>
                   </div>
-                </a>
+                </div>
+
               </Link>
             </div>
           ))}
         </section>
 
       </div>
-
     </Wrapper>
   );
 };

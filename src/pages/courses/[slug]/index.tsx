@@ -31,26 +31,29 @@ type IClassCard = {
 const ClassBox = (props: IClassBox) => {
   const { moduleNumber, title, index, classSlug, readingTime, slug } = props;
   return (
-    <Link key={index} href={`/courses/${slug}/class/${classSlug}`}>
-      <a className="hover:bg-zinc-100 rounded-md">
-        <article
-          key={moduleNumber - index}
-          className="p-2 flex flex-row gap-2 "
-        >
-          <div className="w-24 h-12 rounded-md bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center">
-            <BsQuestion color="#f3f3f3" className="" fontSize="40px" />
-          </div>
-          <div className="flex flex-col gap-1">
-            <h4 className="my-auto font-bold text-base">{title}</h4>
-            <span className="text-sm text-zinc-800 font-medium flex gap-1 dark:text-zinc-300">
-              <AiOutlineRead className="my-auto" />
-              <span className=" px-1 py-[2px] rounded-md ">
-                {readingTime.replace(" read", "")}
-              </span>
+    <Link
+      key={index}
+      href={`/courses/${slug}/class/${classSlug}`}
+      className="hover:bg-zinc-100 rounded-md">
+
+      <article
+        key={moduleNumber - index}
+        className="p-2 flex flex-row gap-2 "
+      >
+        <div className="w-24 h-12 rounded-md bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center">
+          <BsQuestion color="#f3f3f3" className="" fontSize="40px" />
+        </div>
+        <div className="flex flex-col gap-1">
+          <h4 className="my-auto font-bold text-base">{title}</h4>
+          <span className="text-sm text-zinc-800 font-medium flex gap-1 dark:text-zinc-300">
+            <AiOutlineRead className="my-auto" />
+            <span className=" px-1 py-[2px] rounded-md ">
+              {readingTime.replace(" read", "")}
             </span>
-          </div>
-        </article>
-      </a>
+          </span>
+        </div>
+      </article>
+
     </Link>
   );
 };

@@ -22,11 +22,9 @@ const Blog = ({ posts }: any) => {
         />
       }
     >
-
       <h1 className="text-4xl font-bold dark:text-zinc-200 text-zinc-700">
         Blog
       </h1>
-
       <label className="relative block">
         <span className="absolute inset-y-0 left-0 flex items-center pl-2 dark:text-zinc-700">
           <FaSearch />
@@ -38,25 +36,23 @@ const Blog = ({ posts }: any) => {
           onChange={(e) => setSearchValue(e.target.value)}
         />
       </label>
-
       <div className="mt-4 grid">
         <h3 className="mb-4 dark:text-zinc-200 text-zinc-700">Todos los posts</h3>
         {filteredBlogPosts.map(({ title, slug, summary }: { [key: string]: string }, index: number) => (
           <div key={index} className="hover:bg-zinc-100 dark:hover:bg-zinc-700 hover:rounded-md p-4">
-            <Link href={`/blog/${slug}`}>
-              <a className="relative">
-                <h2 className="text-2xl font-bold">{title}</h2>
-                <p className="text-lg dark:text-zinc-300 text-zinc-700">{summary}</p>
-                <div className="flex items-center text-base top-0 right-4 absolute">
+            <Link href={`/blog/${slug}`} className="relative">
 
-                  <ShowViews slug={slug} />
-                </div>
-              </a>
+              <h2 className="text-2xl font-bold">{title}</h2>
+              <p className="text-lg dark:text-zinc-300 text-zinc-700">{summary}</p>
+              <div className="flex items-center text-base top-0 right-4 absolute">
+
+                <ShowViews slug={slug} />
+              </div>
+
             </Link>
           </div>
         ))}
       </div>
-
     </Wrapper>
   );
 };

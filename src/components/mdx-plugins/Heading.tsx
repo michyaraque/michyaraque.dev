@@ -14,20 +14,20 @@ const HeadingMaster = (props: MDXHeading) => {
     let validId = removeAccent(id);
     return (
       <Link href={`#${validId}`}>
-        <a>
-          {React.createElement(
-            headingType,
-            {
-              className: `${size} font-bold text-zinc-700 dark:text-zinc-200 my-4`,
-              id: validId
-            },
-            React.createElement(
-              "span",
-              { className: "anchor" }
-            ),
-            props.children
-          )}
-        </a>
+
+        {React.createElement(
+          headingType,
+          {
+            className: `${size} font-bold text-zinc-700 dark:text-zinc-200 my-4`,
+            id: validId
+          },
+          React.createElement(
+            "span",
+            { className: "anchor" }
+          ),
+          props.children
+        )}
+
       </Link>
     );
   }

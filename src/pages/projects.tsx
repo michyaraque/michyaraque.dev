@@ -87,10 +87,10 @@ const ProjectCard = <T,>({
           <div className="flex flex-row gap-2 justify-between">
             <span className="font-bold text-zinc-700 dark:text-zinc-300">{title}</span>
             <span className="my-auto hover:opacity-90">
-              <Link href={link}>
-                <a target="_blank" rel="noreel">
-                  {link.includes('github') ? <FaGithub size={26} /> : <TbWorld size={26} />}
-                </a>
+              <Link href={link} target="_blank" rel="noreel">
+
+                {link.includes('github') ? <FaGithub size={26} /> : <TbWorld size={26} />}
+
               </Link>
             </span>
           </div>
@@ -103,7 +103,7 @@ const ProjectCard = <T,>({
         </div>
       </article>
     </>
-  )
+  );
 }
 
 const projects = () => {
