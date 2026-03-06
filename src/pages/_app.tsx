@@ -1,9 +1,10 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { DefaultSeo } from 'next-seo'
+import { generateDefaultSeo } from 'next-seo/pages'
 import defaultSEOConfig from '../../next-seo.config';
 import { ThemeProvider } from 'next-themes';
 import React from 'react';
+import Head from 'next/head';
 
 function MichyaraqueDev({ Component, pageProps }: AppProps) {
 
@@ -16,7 +17,9 @@ function MichyaraqueDev({ Component, pageProps }: AppProps) {
   if (isContentReady) {
     return (
       <ThemeProvider attribute='class'>
-        <DefaultSeo {...defaultSEOConfig} />
+        <Head>
+          {generateDefaultSeo(defaultSEOConfig)}
+        </Head>
         <Component {...pageProps} />
       </ThemeProvider>
     )

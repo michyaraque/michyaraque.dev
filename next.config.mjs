@@ -1,18 +1,7 @@
-import nextMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
-import remarkParse from 'remark-parse'
-import remarkRehype from 'remark-rehype'
-import rehypePrism from 'rehype-prism-plus';
-import rehypeCodeTitles from 'rehype-code-titles'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import createMDX from '@next/mdx'
 
-
-const withMDX = nextMDX({
+const withMDX = createMDX({
   extension: /\.mdx?$/,
-  options: {
-    remarkPlugins: [remarkGfm, remarkParse, remarkRehype],
-    rehypePlugins: [rehypePrism, rehypeCodeTitles, rehypeAutolinkHeadings],
-  },
 })
 
 export default withMDX({

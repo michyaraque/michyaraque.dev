@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { NextSeo } from 'next-seo';
+import { generateNextSeo } from 'next-seo/pages';
 
 import { AppConfig } from 'constant/AppConfig';
 import { cleanText } from 'utils';
@@ -64,26 +64,26 @@ const Metadata = (props: IMetadataProps) => {
           href={`${router.basePath}/favicon.ico`}
           key="favicon"
         />
-      </Head>
-      <NextSeo
-        {...metadataRest}
-        title={title}
-        description={description}
-        canonical={`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`}
-        openGraph={{
-          images: [
-            {
-              url: handleOGImage(),
-              alt: title,
-            },
-          ],
+        {generateNextSeo({
+          ...metadataRest,
           title: title,
           description: description,
-          url: `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`,
-          locale: AppConfig.locale,
-          site_name: AppConfig.site_name,
-        }}
-      />
+          canonical: `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`,
+          openGraph: {
+            images: [
+              {
+                url: handleOGImage(),
+                alt: title,
+              },
+            ],
+            title: title,
+            description: description,
+            url: `${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`,
+            locale: AppConfig.locale,
+            site_name: AppConfig.site_name,
+          }
+        })}
+      </Head>
     </>
   );
 };

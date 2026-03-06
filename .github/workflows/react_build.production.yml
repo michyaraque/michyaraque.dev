@@ -51,14 +51,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-      - name: Copy HTACCESS to VPS
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: .backend/root/.htaccess
-          remote: ${{ secrets.VPS_PATH }}/.htaccess
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          password: ${{ secrets.PASSWORD }}
       - name: Copy backend to VPS
         uses: garygrossgarten/github-action-scp@release
         with:
