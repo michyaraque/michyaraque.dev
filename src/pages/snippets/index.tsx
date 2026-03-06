@@ -4,31 +4,37 @@ import { getAllFilesMetadata } from '@lib/mdx';
 
 
 const Snippets = ({ snippets }: any) => {
-
   return (
     <Wrapper
+      prose={false}
       meta={
         <Metadata
           title="Snippets"
-          description="Crear, innovar y compartir ideas"
+          description="Pequeños fragmentos de código, grandes soluciones técnicas."
         />
       }
     >
-      <section aria-label="Header Section">
-        <h1 className="text-4xl font-bold dark:text-gray-300 text-gray-700">
-          Snippets
-        </h1>
-        <p className="mt-2">
-          Los snippets que comparto son pequeños extractos de código que te ayudan a mejorar tu entorno de programación. Encontrarás snippets de Solidity, Hardhat, NodeJs, PHP ó incluso CSS.
-        </p>
-      </section>
+      <div className="py-12 flex flex-col gap-16">
+        {/* Header */}
+        <section className="flex flex-col gap-6">
+           <div className="flex items-center gap-4">
+              <div className="w-12 h-[2px] bg-brand-primary"></div>
+              <p className="text-brand-primary font-mono uppercase tracking-widest text-xs font-bold">sys.fragments // Binary</p>
+           </div>
+           <h1 className="text-6xl md:text-8xl lg:text-9xl font-extrabold uppercase tracking-tighter text-zinc-900 dark:text-white font-display">
+            Fragments<span className="text-brand-primary underline decoration-8">.</span>
+          </h1>
+          <p className="text-zinc-500 max-w-xl text-lg font-mono uppercase tracking-tight">
+            Reusable execution blocks across multiple stacks. Optimized for production speed.
+          </p>
+        </section>
 
-      <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
-        {snippets.map(({ title, slug, icon }: {[key: string]: string}, index: number) => (
-          <SnippetCard key={index} title={title} slug={slug} icon={icon} />
-        ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {snippets.map(({ title, slug, icon }: {[key: string]: string}, index: number) => (
+            <SnippetCard key={index} title={title} slug={slug} icon={icon} index={index} />
+          ))}
+        </div>
       </div>
-
     </Wrapper>
   );
 };

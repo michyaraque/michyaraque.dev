@@ -2,26 +2,52 @@ import Link from 'next/link';
 import React from 'react'
 import { BsArrowRight } from 'react-icons/bs';
 
-const Card = ({ title, slug, icon }: { title: string, slug: string, icon: string }) => {
+interface SnippetCardProps {
+  title: string
+  slug: string
+  icon: string
+  index?: number
+}
+
+const Card = ({ title, slug, icon, index }: SnippetCardProps) => {
   const path = `../tech/technologies/${icon}.svg`;
 
   return (
-    <div className="block py-4 px-2 w-full bg-white rounded-lg border border-zinc-200 shadow-md hover:bg-zinc-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700 cursor-pointer">
+    <Link href={`/snippets/${slug}`} className="group relative block w-full h-full font-mono no-underline" aria-label={`View snippet: ${title}`}>
+        {/* Hard Shadow Offset (Dark) */}
+        <div className="absolute inset-0 bg-zinc-900 dark:bg-zinc-100 translate-y-2 translate-x-2 -z-10 opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
 
-      <Link href={`/snippets/${slug}`}>
-        <section className="flex flex-row items-center gap-2 h-full">
-          <div className="relative block w-[30px] max-w-[30px] max-h-[30px] h-[30px] bg-zinc-200 rounded-md">
-            <img src={path ?? './tech/technologies/unknown.svg'} className="w-full h-full absolute object-contain p-1" />
-          </div>
-          <p className="text-xs font-regular text-zinc-700 dark:text-zinc-400">
-            {title}
-          </p>
-          <div className="min-w-[30px] m-auto relative">
-            <BsArrowRight />
-          </div>
-        </section>
-      </Link>
-    </div>
+        <div className="h-full bg-zinc-50 dark:bg-zinc-800/80 border-2 border-zinc-200 dark:border-zinc-700 p-6 transition-transform duration-300 group-hover:-translate-y-1 group-hover:-translate-x-1 flex flex-col justify-between">
+            <div className="flex justify-between items-start mb-6">
+                <span className="text-[10px] uppercase tracking-widest text-brand-primary font-bold">
+                    {index !== undefined ? `FRAG // ${String(index + 1).padStart(2, '0')}` : 'SNIPPET // CODE'}
+                </span>
+                <div className="relative block w-8 h-8 grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+                    <img
+                      src={path ?? './tech/technologies/unknown.svg'}
+                      className="w-full h-full object-contain"
+                      alt={`${icon} technology logo`}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/tech/technologies/unknown.svg'
+                      }}
+                    />
+                </div>
+            </div>
+
+            <h2 className="text-lg md:text-xl font-bold font-display uppercase tracking-tight text-zinc-900 dark:text-zinc-200 leading-tight no-underline decoration-transparent">
+                {title}
+            </h2>
+
+            <div className="flex items-center justify-between mt-8 pt-4 border-t border-zinc-200/50 dark:border-zinc-700/50">
+                <span className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Run Snippet
+                </span>
+                <span className="text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white group-hover:translate-x-1 transition-all">
+                    <BsArrowRight />
+                </span>
+            </div>
+        </div>
+    </Link>
   )
 }
 

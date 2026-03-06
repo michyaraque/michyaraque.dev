@@ -3,6 +3,7 @@ import LanguageLogo from "./LanguageLogo";
 import { Pre, Link, Image, Divider } from "./mdx-plugins";
 import Tooltip from "./Tooltip";
 import { H1, H2, H3, H4 } from "./mdx-plugins/Heading";
+import Callout from "./ui/Callout";
 
 export default {
   Image: (props: MDXImage) => <Image {...props} />,
@@ -18,4 +19,5 @@ export default {
   LanguageLogo: (props: ILanguageLogo) => <LanguageLogo {...props} />,
   Tooltip: (props: MDXTooltip) => <Tooltip {...props} />,
   Divider: (props: MDXDivider) => <Divider {...props} />,
+  Callout: (props: any) => <Callout {...props} />,
 }

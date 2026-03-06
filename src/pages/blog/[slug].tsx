@@ -8,46 +8,66 @@ import { readingTimeToSpanish, slugToHex, styledDate } from 'utils';
 import useUpdateViews from 'hooks/useUpdateViews';
 
 export default function Post({ source, frontmatter }: any) {
-
-  const {views} = useUpdateViews(frontmatter.slug)
+  const { views } = useUpdateViews(frontmatter.slug)
 
   return (
     <Wrapper
-      meta={<Metadata title={frontmatter.title} description="Blog de software y curiosidades." />}
+      prose={true}
+      meta={<Metadata title={frontmatter.title} description={frontmatter.summary || "Technical deep dive."} />}
     >
-      <div className="w-full h-full rounded-lg px-4 md:px-10 pb-6 pt-40 relative" style={{
-        backgroundColor: slugToHex(frontmatter.slug),
-        backgroundImage: `${frontmatter.cover ? `url(/images/${frontmatter.slug}/${frontmatter.cover})` : ''}`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}>
-        <div className="bg-black/50 absolute top-0 right-0 left-0 bottom-0 z-0 rounded-lg"/>
+      <article className="py-20 flex flex-col gap-12">
+        {/* Technical Header */}
+        <header className="flex flex-col gap-8 pb-12 border-b-2 border-zinc-100 dark:border-zinc-800">
+           <div className="flex items-center gap-4">
+              <div className="w-12 h-[2px] bg-brand-primary"></div>
+              <p className="text-brand-primary font-mono uppercase tracking-widest text-xs font-bold">
+                sys.log // {frontmatter.category || 'Entry'}
+              </p>
+           </div>
 
-        <h1 className="text-2xl md:text-5xl text-white font-bold z-1 relative">{frontmatter.title}</h1>
+           <h1 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase tracking-tighter text-zinc-900 dark:text-white font-display leading-[0.9]">
+             {frontmatter.title}<span className="text-brand-primary">.</span>
+           </h1>
 
-        <div className="text-white flex justify-between mt-4 z-1 relative">
+           <div className="flex flex-wrap gap-8 items-center font-mono text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-400">
+              <div className="flex flex-col gap-1">
+                 <span className="text-zinc-300 dark:text-zinc-600">Timestamp</span>
+                 <span className="text-zinc-900 dark:text-zinc-300">{styledDate(frontmatter.publishedAt)}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                 <span className="text-zinc-300 dark:text-zinc-600">Execution_Time</span>
+                 <span className="text-zinc-900 dark:text-zinc-300">{readingTimeToSpanish(frontmatter.readingTime.text)}</span>
+              </div>
+              <div className="flex flex-col gap-1">
+                 <span className="text-zinc-300 dark:text-zinc-600">Traffic_Metris</span>
+                 <span className="text-zinc-900 dark:text-zinc-300">{views || '000'} UNITS</span>
+              </div>
+              <div className="flex items-center gap-3 ml-auto">
+                 <img src="/me.webp" alt="Michael Araque" className="w-10 h-10 border border-zinc-200 dark:border-zinc-800 p-1 bg-white dark:bg-zinc-900" />
+                 <div className="flex flex-col">
+                    <span className="text-zinc-300 dark:text-zinc-600">Operator</span>
+                    <span className="text-zinc-900 dark:text-zinc-300 uppercase">Michy Araque</span>
+                 </div>
+              </div>
+           </div>
+        </header>
 
-          <div className="flex items-center">
-            <img src="/me.jpg" alt="Michael Araque's face" className="w-[36px] rounded-full border-2 p-0.5" />
-            <div className="text-base ml-2 flex flex-col md:flex-row md:gap-2">
-              <p>Michael Araque</p>
-              <span className="hidden md:inline"> | </span>
-              <p>{styledDate(frontmatter.publishedAt)}</p>
-            </div>
+        {/* Feature Image if exists */}
+        {frontmatter.cover && (
+          <div className="w-full h-80 md:h-[500px] border-2 border-zinc-200 dark:border-zinc-800 p-2 bg-white dark:bg-zinc-900">
+            <div
+              className="w-full h-full bg-center bg-cover grayscale hover:grayscale-0 transition-all duration-700"
+              style={{ backgroundImage: `url(/images/${frontmatter.slug}/${frontmatter.cover})` }}
+            />
           </div>
-          <div className="text-base flex flex-col items-end md:items-end">
+        )}
 
-            <p className="ml-1">
-              {views && views} visitas
-            </p>
-            <p>
-              {readingTimeToSpanish(frontmatter.readingTime.text)}
-            </p>
-          </div>
+        {/* Content */}
+        <div className="max-w-none">
+          {/* @ts-expect-error MDXRemote has type issues in React 19/Next 16 */}
+          <MDXRemote {...source} components={MDXComponents} />
         </div>
-      </div>
-      <MDXRemote {...source} components={MDXComponents} />
+      </article>
     </Wrapper>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { IconType } from "react-icons/lib";
-import { SiC, SiJavascript, SiLua, SiPhp, SiReact, SiSolidity, SiTypescript } from "react-icons/si";
+import { SiC, SiJavascript, SiLua, SiNodedotjs, SiPhp, SiPostgresql, SiReact, SiRedis, SiSolidity, SiTypescript } from "react-icons/si";
 import { VscRegex } from "react-icons/vsc";
 import {TbBrandNextjs} from 'react-icons/tb';
 import Link from "next/link";
@@ -43,6 +43,12 @@ const brands: ILanguageItems = {
 
 const LanguageItems: ILanguageItems = {
   ...brands,
+  nodejs: {
+    icon: SiNodedotjs,
+    color: "technology-nodejs",
+    tooltip: "NodeJS",
+    link: "https://nodejs.org/",
+  },
   lua: {
     icon: SiLua,
     color: "languages-lua",
@@ -111,11 +117,25 @@ const LanguageItems: ILanguageItems = {
     link: "https://reactjs.org/",
   },
   nextjs: {
-    icon: TbBrandNextjs,
+    icon: "/tech/technologies/nextjs.svg",
     color: "technology-nextjs",
     tooltip: "Nextjs Framework",
     link: "https://nextjs.org/",
-  }
+  },
+
+  redis: {
+    icon: "/tech/technologies/redis.svg",
+    color: "technology-redis",
+    tooltip: "Redis",
+    link: "https://redis.io/",
+  },
+
+  postgresql: {
+    icon: SiPostgresql,
+    color: "technology-postgresql",
+    tooltip: "PostgreSQL",
+    link: "https://www.postgresql.org/",
+  },
 
 };
 
@@ -134,6 +154,13 @@ const LanguageLogo = ({
   version,
   ...props
 }: ILanguageLogo) => {
+  const langKey = language.toLowerCase();
+
+  if (!LanguageItems[langKey]) {
+    return null;
+  }
+
+  const techColor = `var(--color-technologies-${langKey})`;
 
   return (
     <span
@@ -141,20 +168,21 @@ const LanguageLogo = ({
         badge ? "badge badge-secondary" : ""
       }`}
     >
-      <span data-tip={LanguageItems[language].tooltip} className="tooltip">
-        {typeof LanguageItems[language].icon !== "string" ? (
-          React.createElement(LanguageItems[language].icon as IconType | any, {
+      <span data-tip={LanguageItems[langKey]?.tooltip} className="tooltip">
+        {typeof LanguageItems[langKey]?.icon !== "string" ? (
+          React.createElement(LanguageItems[langKey]?.icon as IconType | any, {
             className: `inline-block ${className ? className : ''}`,
             style: {
-              fill: `var(--color-technologies-${language})`,
-              color: `var(--color-technologies-${language})`
+              fill: techColor,
+              color: techColor
             }
           })
         ) : (
           <img
-            src={LanguageItems[language].icon as string}
-            alt={LanguageItems[language].tooltip}
+            src={LanguageItems[langKey]?.icon as string}
+            alt={LanguageItems[langKey]?.tooltip}
             className={`inline-block w-5 h-5 pointer-events-none  ${className ? className : ''}`}
+            style={{ color: techColor }}
           />
         )}
       </span>

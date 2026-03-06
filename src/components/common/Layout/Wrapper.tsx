@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import Navbar from "./Navbar";
 
@@ -10,15 +9,14 @@ type IMainProps = {
   prose?: boolean;
 };
 
-const Wrapper = ({prose = true, ...props}: IMainProps) => (
-  <div className="w-full px-1 text-gray-600 dark:text-gray-300 antialiased">
+const Wrapper = ({ prose = true, ...props }: IMainProps) => (
+  <div className="w-full min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-300 selection:bg-brand-primary selection:text-white transition-colors duration-300">
     {props.meta}
-    <div className="mx-auto max-w-5xl flex flex-col justify-center px-4 md:px-8">
-      <div className="pt-2 pb-4" />
+    <div className="mx-auto max-w-6xl flex flex-col px-4 md:px-12 relative">
       <Navbar />
-      <div className={`content text-xl ${prose && "prose"} dark:prose-dark`}>
+      <main className={`grow ${prose ? 'prose dark:prose-invert max-w-none pb-8 prose-headings:font-display prose-headings:uppercase prose-headings:tracking-tighter prose-a:text-brand-primary' : 'w-full'}`}>
         {props.children}
-      </div>
+      </main>
       <Footer />
     </div>
   </div>

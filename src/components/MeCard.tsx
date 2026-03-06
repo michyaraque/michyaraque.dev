@@ -13,7 +13,7 @@ const MeCard = () => {
 
         <div className="border-b-4 mb-1 w-full">
           <img
-          src="me.jpg"
+          src="me.webp"
           alt="Michael Araque's face"
           className="grayscale-50 object-cover w-full h-[240px] rounded-t-md" />
         </div>

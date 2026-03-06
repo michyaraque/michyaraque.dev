@@ -33,6 +33,7 @@ const Metadata = (props: IMetadataProps) => {
 
   return (
     <>
+      {/* @ts-expect-error Head component type mismatch */}
       <Head>
         <meta charSet="UTF-8" key="charset" />
         <meta
